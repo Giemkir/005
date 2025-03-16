@@ -1,0 +1,41 @@
+@{
+    var newsletterTitle = "Yerel Turlar Bültenine Abone Olun";
+    var newsletterDescription = "En yeni tur fırsatlarını, özel indirimleri ve yerel seyahat ipuçlarını içeren aylık bültenimize ücretsiz abone olun.";
+}
+
+<section class="newsletter-section">
+    <div class="newsletter-bg"></div>
+    <div class="container">
+        <div class="newsletter-container">
+            <div class="newsletter-content">
+                <div class="newsletter-text">
+                    <span class="newsletter-badge">AYLIK BÜLTEN</span>
+                    <h2>Yerel Turlar <span class="highlight">Bültenine</span> Abone Olun</h2>
+                    <p>@newsletterDescription</p>
+                    <ul class="newsletter-features">
+                        <li><i class="fas fa-check-circle"></i> Özel indirim ve fırsatlardan ilk siz haberdar olun</li>
+                        <li><i class="fas fa-check-circle"></i> Yerel rehberlerimizden seyahat ipuçları alın</li>
+                        <li><i class="fas fa-check-circle"></i> Yeni turlarımızdan anında haberdar olun</li>
+                        <li><i class="fas fa-check-circle"></i> İstediğiniz zaman abonelikten çıkabilirsiniz</li>
+                    </ul>
+                </div>
+                <div class="newsletter-form-container">
+                    <form class="newsletter-form" asp-controller="Home" asp-action="Subscribe" method="post">
+                        <div class="form-group">
+                            <input type="text" name="Name" placeholder="Adınız" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="Email" placeholder="E-posta adresiniz" required>
+                        </div>
+                        <button type="submit" class="newsletter-btn">
+                            Abone Ol <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <p class="privacy-note">
+                            Kişisel verileriniz <a href="/gizlilik-politikasi">Gizlilik Politikamız</a> doğrultusunda korunmaktadır.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 

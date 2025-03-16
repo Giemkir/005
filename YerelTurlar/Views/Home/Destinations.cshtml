@@ -1,0 +1,224 @@
+@{
+    ViewData["Title"] = "Destinasyonlar";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/destinations.css" />
+}
+
+<section class="page-hero">
+    <div class="page-hero-image">
+        <img src="https://images.unsplash.com/photo-1530841377377-3ff06c0ca713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Türkiye Destinasyonları">
+        <div class="page-hero-overlay"></div>
+    </div>
+    <div class="container">
+        <div class="page-hero-content">
+            <h1>Türkiye'nin Büyüleyici Destinasyonları</h1>
+            <p>Tarihi zenginlikler, doğal güzellikler ve eşsiz kültürel deneyimler sunan destinasyonları keşfedin</p>
+        </div>
+    </div>
+</section>
+
+<section class="destinations-filter">
+    <div class="container">
+        <div class="filter-container">
+            <div class="filter-group">
+                <label for="region">Bölge</label>
+                <select id="region">
+                    <option value="">Tüm Bölgeler</option>
+                    <option value="marmara">Marmara</option>
+                    <option value="ege">Ege</option>
+                    <option value="akdeniz">Akdeniz</option>
+                    <option value="ic-anadolu">İç Anadolu</option>
+                    <option value="karadeniz">Karadeniz</option>
+                    <option value="dogu-anadolu">Doğu Anadolu</option>
+                    <option value="guneydogu-anadolu">Güneydoğu Anadolu</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="category">Kategori</label>
+                <select id="category">
+                    <option value="">Tüm Kategoriler</option>
+                    <option value="kultur">Kültür</option>
+                    <option value="yemek">Yemek</option>
+                    <option value="doga">Doğa</option>
+                    <option value="spor">Spor</option>
+                    <option value="fotograf">Fotoğraf</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="duration">Süre</label>
+                <select id="duration">
+                    <option value="">Tüm Süreler</option>
+                    <option value="1-3">1-3 Saat</option>
+                    <option value="3-6">3-6 Saat</option>
+                    <option value="6-12">6-12 Saat</option>
+                    <option value="full-day">Tam Gün</option>
+                    <option value="multi-day">Çok Günlü</option>
+                </select>
+            </div>
+            <button class="filter-btn">Filtrele</button>
+        </div>
+    </div>
+</section>
+
+<section class="featured-destinations">
+    <div class="container">
+        <div class="section-title-container">
+            <p class="section-subtitle">Öne Çıkanlar</p>
+            <h2>Popüler Destinasyonlar</h2>
+            <p class="section-description">Türkiye'nin en çok ziyaret edilen ve beğenilen destinasyonlarını keşfedin.</p>
+        </div>
+        
+        <div class="featured-destination-cards">
+            <div class="featured-destination-card">
+                <div class="featured-destination-image">
+                    <img src="https://images.unsplash.com/photo-1527838832700-5059252407fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=698&q=80" alt="İstanbul">
+                    <div class="destination-overlay"></div>
+                    <div class="destination-badge">
+                        <span>42 Deneyim</span>
+                    </div>
+                </div>
+                <div class="featured-destination-content">
+                    <h3>İstanbul</h3>
+                    <p>İki kıtayı birleştiren, tarihi ve modern yüzüyle büyüleyen şehir</p>
+                    <div class="destination-categories">
+                        <span><i class="fas fa-landmark"></i> Kültür</span>
+                        <span><i class="fas fa-utensils"></i> Yemek</span>
+                        <span><i class="fas fa-camera"></i> Fotoğraf</span>
+                    </div>
+                    <a href="#" class="destination-link">Deneyimleri Keşfet <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="featured-destination-card">
+                <div class="featured-destination-image">
+                    <img src="https://images.unsplash.com/photo-1589561454226-796a8aa89b05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Kapadokya">
+                    <div class="destination-overlay"></div>
+                    <div class="destination-badge">
+                        <span>28 Deneyim</span>
+                    </div>
+                </div>
+                <div class="featured-destination-content">
+                    <h3>Kapadokya</h3>
+                    <p>Peri bacaları, sıcak hava balonları ve yeraltı şehirleriyle masalsı bir deneyim</p>
+                    <div class="destination-categories">
+                        <span><i class="fas fa-mountain"></i> Doğa</span>
+                        <span><i class="fas fa-landmark"></i> Kültür</span>
+                        <span><i class="fas fa-camera"></i> Fotoğraf</span>
+                    </div>
+                    <a href="#" class="destination-link">Deneyimleri Keşfet <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="all-destinations">
+    <div class="container">
+        <div class="section-title-container">
+            <p class="section-subtitle">Keşfet</p>
+            <h2>Tüm Destinasyonlar</h2>
+            <p class="section-description">Türkiye'nin dört bir yanındaki benzersiz destinasyonları keşfedin.</p>
+        </div>
+        
+        <div class="destination-grid">
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1527838832700-5059252407fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=698&q=80" alt="İstanbul">
+                <div class="card-content">
+                    <h3>İstanbul</h3>
+                    <p>42 deneyim</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1589561454226-796a8aa89b05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Kapadokya">
+                <div class="card-content">
+                    <h3>Kapadokya</h3>
+                    <p>28 deneyim</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1605283176568-9b41fde3672e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Antalya">
+                <div class="card-content">
+                    <h3>Antalya</h3>
+                    <p>35 deneyim</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="İzmir">
+                <div class="card-content">
+                    <h3>İzmir</h3>
+                    <p>23 deneyim</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1628529791746-be9a95f90c55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Bodrum">
+                <div class="card-content">
+                    <h3>Bodrum</h3>
+                    <p>19 deneyim</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1610971309274-19c33f544302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Pamukkale">
+                <div class="card-content">
+                    <h3>Pamukkale</h3>
+                    <p>15 deneyim</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1570900808791-d530855f79e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Efes">
+                <div class="card-content">
+                    <h3>Efes</h3>
+                    <p>12 deneyim</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1600240644455-fd509322a113?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Fethiye">
+                <div class="card-content">
+                    <h3>Fethiye</h3>
+                    <p>21 deneyim</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1594818379496-da1e345b0ded?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Trabzon">
+                <div class="card-content">
+                    <h3>Trabzon</h3>
+                    <p>17 deneyim</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1600240644455-fd509322a113?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Marmaris">
+                <div class="card-content">
+                    <h3>Marmaris</h3>
+                    <p>16 deneyim</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1570101945621-945409a6370f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Gaziantep">
+                <div class="card-content">
+                    <h3>Gaziantep</h3>
+                    <p>14 deneyim</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Mardin">
+                <div class="card-content">
+                    <h3>Mardin</h3>
+                    <p>11 deneyim</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pagination">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#" class="next"><i class="fas fa-chevron-right"></i></a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        // Filtreleme işlemleri için JavaScript kodları buraya eklenebilir
+    </script>
+} 
