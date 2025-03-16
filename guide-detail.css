@@ -1,0 +1,646 @@
+/* Guide Detail Page Specific Styles */
+
+/* Guide Profile Header */
+.guide-profile-header {
+    padding: 60px 0 30px;
+    background-color: #fef8f5;
+    position: relative;
+}
+
+.guide-profile-card {
+    display: flex;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.guide-profile-image {
+    width: 300px;
+    height: 300px;
+    position: relative;
+}
+
+.guide-profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+.guide-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(52, 152, 219, 0.9);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    z-index: 2;
+}
+
+.guide-badge.top {
+    background-color: rgba(210, 59, 104, 0.9);
+}
+
+.guide-profile-info {
+    flex: 1;
+    padding: 30px;
+}
+
+.guide-profile-info h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #6a1b4d;
+    margin-bottom: 10px;
+}
+
+.guide-location {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.guide-specialty {
+    color: #d23b68;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+
+.guide-stats {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #eee;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #6a1b4d;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #777;
+}
+
+.guide-languages {
+    margin-bottom: 25px;
+}
+
+.guide-languages h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.language-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.language-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #f9f9f9;
+    padding: 8px 15px;
+    border-radius: 25px;
+    font-size: 14px;
+}
+
+.language-tag img {
+    width: 20px;
+    height: 15px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.guide-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.contact-btn, .favorite-btn, .share-btn {
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.contact-btn {
+    background-color: #d23b68;
+    color: white;
+    border: none;
+}
+
+.contact-btn:hover {
+    background-color: #b92e59;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(210, 59, 104, 0.3);
+}
+
+.favorite-btn, .share-btn {
+    background-color: white;
+    color: #555;
+    border: 1px solid #ddd;
+}
+
+.favorite-btn:hover, .share-btn:hover {
+    background-color: #f9f9f9;
+    transform: translateY(-2px);
+}
+
+/* Guide Details Section */
+.guide-details {
+    padding: 60px 0;
+    background-color: white;
+}
+
+.guide-details-content {
+    display: flex;
+    gap: 40px;
+}
+
+.guide-about {
+    flex: 1;
+}
+
+.guide-about h2, .guide-tours h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #6a1b4d;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.guide-about h2::after, .guide-tours h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #d23b68;
+}
+
+.guide-about p {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.guide-about h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 30px 0 15px;
+}
+
+.expertise-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.expertise-tags span {
+    background-color: #f9f9f9;
+    color: #555;
+    padding: 8px 15px;
+    border-radius: 25px;
+    font-size: 14px;
+}
+
+.certificates-list {
+    list-style: none;
+}
+
+.certificates-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: #555;
+}
+
+.certificates-list li i {
+    color: #d23b68;
+    font-size: 16px;
+}
+
+.guide-tours {
+    flex: 1;
+}
+
+.guide-tours-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+}
+
+.experience-card {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    border: 1px solid rgba(210, 59, 104, 0.1);
+}
+
+.experience-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(210, 59, 104, 0.15);
+}
+
+.experience-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+}
+
+.experience-card .card-content {
+    padding: 20px;
+    position: relative;
+}
+
+.experience-card .price {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    background-color: #d23b68;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(210, 59, 104, 0.3);
+}
+
+.experience-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0;
+    color: #6a1b4d;
+}
+
+.experience-card .description {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.experience-card .rating,
+.experience-card .duration {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+    color: #777;
+    font-size: 14px;
+}
+
+.experience-card .rating {
+    color: #f9b248;
+}
+
+.book-btn {
+    display: inline-block;
+    background-color: #d23b68;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 15px;
+    transition: all 0.3s;
+}
+
+.book-btn:hover {
+    background-color: #b92e59;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(210, 59, 104, 0.3);
+}
+
+/* Guide Reviews Section */
+.guide-reviews {
+    padding: 60px 0;
+    background-color: #fef8f5;
+}
+
+.guide-reviews h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #6a1b4d;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.guide-reviews h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #d23b68;
+}
+
+.reviews-summary {
+    background-color: white;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.rating-summary {
+    display: flex;
+    gap: 50px;
+}
+
+.average-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+}
+
+.rating-number {
+    font-size: 48px;
+    font-weight: 700;
+    color: #6a1b4d;
+    line-height: 1;
+}
+
+.rating-stars {
+    color: #f9b248;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.rating-count {
+    color: #777;
+    font-size: 14px;
+}
+
+.rating-bars {
+    flex: 1;
+}
+
+.rating-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.bar-label {
+    width: 60px;
+    font-size: 14px;
+    color: #555;
+}
+
+.bar-container {
+    flex: 1;
+    height: 8px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background-color: #f9b248;
+    border-radius: 4px;
+}
+
+.bar-percent {
+    width: 40px;
+    font-size: 14px;
+    color: #555;
+    text-align: right;
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.review-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.review-header {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.review-header img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.review-info {
+    flex: 1;
+}
+
+.review-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.review-info p {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.review-date {
+    font-size: 12px !important;
+    color: #999 !important;
+}
+
+.review-rating {
+    color: #f9b248;
+    font-size: 14px;
+}
+
+.review-content p {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.load-more {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.load-more-btn {
+    background-color: transparent;
+    color: #d23b68;
+    border: 2px solid #d23b68;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.load-more-btn:hover {
+    background-color: #d23b68;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(210, 59, 104, 0.3);
+}
+
+/* Similar Guides Section */
+.similar-guides {
+    padding: 60px 0;
+    background-color: white;
+}
+
+.similar-guides h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #6a1b4d;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.similar-guides h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #d23b68;
+}
+
+.similar-guides-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .guide-profile-card {
+        flex-direction: column;
+    }
+    
+    .guide-profile-image {
+        width: 100%;
+        height: 300px;
+    }
+    
+    .guide-details-content {
+        flex-direction: column;
+    }
+    
+    .rating-summary {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .average-rating {
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .guide-stats {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .stat {
+        width: calc(50% - 10px);
+    }
+    
+    .guide-actions {
+        flex-wrap: wrap;
+    }
+    
+    .contact-btn, .favorite-btn, .share-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .review-header {
+        flex-direction: column;
+    }
+    
+    .review-header img {
+        margin-bottom: 15px;
+    }
+    
+    .review-rating {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .guide-profile-info h1 {
+        font-size: 28px;
+    }
+    
+    .guide-specialty {
+        font-size: 16px;
+    }
+    
+    .language-tags {
+        flex-direction: column;
+    }
+    
+    .expertise-tags {
+        flex-direction: column;
+    }
+} 
