@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - YerelTurlar</title>
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link rel="stylesheet" href="~/css/auth.css" />
+    @await RenderSectionAsync("Styles", required: false)
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="auth-body">
+    <div class="auth-logo">
+        <a href="/">
+            <h1><i class="fas fa-globe-americas"></i> YerelTurlar</h1>
+        </a>
+    </div>
+
+    <!-- Bildirim Bölümü -->
+    @if (TempData["SubscribeSuccess"] != null)
+    {
+        <div class="notification success">
+            <div class="container">
+                <div class="notification-content">
+                    <i class="fas fa-check-circle"></i>
+                    <p>@TempData["SubscribeSuccess"]</p>
+                    <button class="notification-close"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+        </div>
+    }
+    
+    @if (TempData["SubscribeError"] != null)
+    {
+        <div class="notification error">
+            <div class="container">
+                <div class="notification-content">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p>@TempData["SubscribeError"]</p>
+                    <button class="notification-close"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+        </div>
+    }
+
+    @RenderBody()
+
+    <div class="auth-back-link">
+        <a href="/"><i class="fas fa-arrow-left"></i> Ana Sayfaya Dön</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html> 

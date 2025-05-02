@@ -23,6 +23,16 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult AboutUs()
+    {
+        return RedirectToAction("About");
+    }
+
+    public IActionResult Tours()
+    {
+        return View();
+    }
+
     public IActionResult Destinations()
     {
         return View();

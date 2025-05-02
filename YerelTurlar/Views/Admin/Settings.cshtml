@@ -1,0 +1,283 @@
+@model YerelTurlar.ViewModels.SiteSettingsViewModel
+@{
+    ViewData["Title"] = "Ayarlar";
+    Layout = "_AdminLayout";
+}
+
+<!-- Ayarlar Başlık ve Özet -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div>
+        <h1 class="h3 mb-0 text-gray-800">Site Ayarları</h1>
+        <p class="text-muted">Site genelinde kullanılan ayarları bu sayfadan yönetebilirsiniz.</p>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Genel Ayarlar -->
+    <div class="col-xl-6 col-lg-6">
+        <div class="dashboard-card mb-4">
+            <div class="dashboard-card-header py-3">
+                <h3 class="m-0">Genel Ayarlar</h3>
+            </div>
+            <div class="dashboard-card-body">
+                <form asp-controller="Admin" asp-action="UpdateGeneralSettings" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="siteName" class="form-label">Site Adı</label>
+                        <input type="text" class="form-control" id="siteName" name="SiteName" value="@Model.SiteName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="siteDescription" class="form-label">Site Açıklaması</label>
+                        <textarea class="form-control" id="siteDescription" name="SiteDescription" rows="3">@Model.SiteDescription</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="siteEmail" class="form-label">İletişim Email</label>
+                        <input type="email" class="form-control" id="siteEmail" name="ContactEmail" value="@Model.ContactEmail">
+                    </div>
+                    <div class="mb-3">
+                        <label for="sitePhone" class="form-label">İletişim Telefon</label>
+                        <input type="text" class="form-control" id="sitePhone" name="ContactPhone" value="@Model.ContactPhone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="siteAddress" class="form-label">Adres</label>
+                        <textarea class="form-control" id="siteAddress" name="Address" rows="3">@Model.Address</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="logoFile" class="form-label">Logo</label>
+                        <input type="file" class="form-control" id="logoFile" name="LogoFile">
+                        @if (!string.IsNullOrEmpty(Model.LogoUrl))
+                        {
+                            <div class="mt-2">
+                                <img src="@Model.LogoUrl" height="40" alt="Site Logo">
+                                <small class="form-text text-muted d-block">Mevcut logo</small>
+                            </div>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <label for="faviconFile" class="form-label">Favicon</label>
+                        <input type="file" class="form-control" id="faviconFile" name="FaviconFile">
+                        @if (!string.IsNullOrEmpty(Model.FaviconUrl))
+                        {
+                            <div class="mt-2">
+                                <img src="@Model.FaviconUrl" height="32" alt="Favicon">
+                                <small class="form-text text-muted d-block">Mevcut favicon</small>
+                            </div>
+                        }
+                    </div>
+                    <button type="submit" class="btn btn-primary">Genel Ayarları Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sosyal Medya & İletişim -->
+    <div class="col-xl-6 col-lg-6">
+        <div class="dashboard-card mb-4">
+            <div class="dashboard-card-header py-3">
+                <h3 class="m-0">Sosyal Medya & SEO</h3>
+            </div>
+            <div class="dashboard-card-body">
+                <form asp-controller="Admin" asp-action="UpdateSocialSettings" method="post">
+                    <div class="mb-3">
+                        <label for="facebookUrl" class="form-label">Facebook URL</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fab fa-facebook-f"></i></span>
+                            <input type="url" class="form-control" id="facebookUrl" name="FacebookUrl" value="@Model.FacebookUrl">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="twitterUrl" class="form-label">Twitter URL</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fab fa-twitter"></i></span>
+                            <input type="url" class="form-control" id="twitterUrl" name="TwitterUrl" value="@Model.TwitterUrl">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="instagramUrl" class="form-label">Instagram URL</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fab fa-instagram"></i></span>
+                            <input type="url" class="form-control" id="instagramUrl" name="InstagramUrl" value="@Model.InstagramUrl">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="youtubeUrl" class="form-label">YouTube URL</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fab fa-youtube"></i></span>
+                            <input type="url" class="form-control" id="youtubeUrl" name="YoutubeUrl" value="@Model.YoutubeUrl">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="mb-3">
+                        <label for="metaTitle" class="form-label">Meta Başlık</label>
+                        <input type="text" class="form-control" id="metaTitle" name="MetaTitle" value="@Model.MetaTitle">
+                        <small class="form-text text-muted">SEO için sayfa başlığı</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="metaDescription" class="form-label">Meta Açıklama</label>
+                        <textarea class="form-control" id="metaDescription" name="MetaDescription" rows="3">@Model.MetaDescription</textarea>
+                        <small class="form-text text-muted">SEO için sayfa açıklaması</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="metaKeywords" class="form-label">Meta Anahtar Kelimeler</label>
+                        <input type="text" class="form-control" id="metaKeywords" name="MetaKeywords" value="@Model.MetaKeywords">
+                        <small class="form-text text-muted">SEO için anahtar kelimeler (virgülle ayırın)</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sosyal & SEO Ayarlarını Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Ödeme Ayarları -->
+    <div class="col-xl-6 col-lg-6">
+        <div class="dashboard-card mb-4">
+            <div class="dashboard-card-header py-3">
+                <h3 class="m-0">Ödeme Ayarları</h3>
+            </div>
+            <div class="dashboard-card-body">
+                <form asp-controller="Admin" asp-action="UpdatePaymentSettings" method="post">
+                    <div class="mb-3">
+                        <label for="currency" class="form-label">Para Birimi</label>
+                        <select class="form-select" id="currency" name="Currency">
+                            <option value="TRY" selected="@(Model.Currency == "TRY")">Türk Lirası (₺)</option>
+                            <option value="USD" selected="@(Model.Currency == "USD")">ABD Doları ($)</option>
+                            <option value="EUR" selected="@(Model.Currency == "EUR")">Euro (€)</option>
+                            <option value="GBP" selected="@(Model.Currency == "GBP")">İngiliz Sterlini (£)</option>
+                        </select>
+                    </div>
+                    <hr class="my-4">
+                    <h5 class="mb-3">Ödeme Seçenekleri</h5>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="creditCardEnabled" name="CreditCardEnabled" @(Model.CreditCardEnabled ? "checked" : "")>
+                        <label class="form-check-label" for="creditCardEnabled">Kredi Kartı Ödemesi</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="paypalEnabled" name="PaypalEnabled" @(Model.PaypalEnabled ? "checked" : "")>
+                        <label class="form-check-label" for="paypalEnabled">PayPal Ödemesi</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="bankTransferEnabled" name="BankTransferEnabled" @(Model.BankTransferEnabled ? "checked" : "")>
+                        <label class="form-check-label" for="bankTransferEnabled">Banka Havale/EFT</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="cashOnDeliveryEnabled" name="CashOnDeliveryEnabled" @(Model.CashOnDeliveryEnabled ? "checked" : "")>
+                        <label class="form-check-label" for="cashOnDeliveryEnabled">Yerinde Ödeme</label>
+                    </div>
+                    <div id="bankTransferDetails" class="mb-3 @(Model.BankTransferEnabled ? "" : "d-none")">
+                        <label for="bankDetails" class="form-label">Banka Hesap Bilgileri</label>
+                        <textarea class="form-control" id="bankDetails" name="BankDetails" rows="4" placeholder="Banka adı, hesap sahibi, IBAN, şube bilgilerini girin">@Model.BankDetails</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ödeme Ayarlarını Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Email Ayarları -->
+    <div class="col-xl-6 col-lg-6">
+        <div class="dashboard-card mb-4">
+            <div class="dashboard-card-header py-3">
+                <h3 class="m-0">Email Ayarları</h3>
+            </div>
+            <div class="dashboard-card-body">
+                <form asp-controller="Admin" asp-action="UpdateEmailSettings" method="post">
+                    <div class="mb-3">
+                        <label for="smtpServer" class="form-label">SMTP Sunucu</label>
+                        <input type="text" class="form-control" id="smtpServer" name="SmtpServer" value="@Model.SmtpServer">
+                    </div>
+                    <div class="mb-3">
+                        <label for="smtpPort" class="form-label">SMTP Port</label>
+                        <input type="number" class="form-control" id="smtpPort" name="SmtpPort" value="@Model.SmtpPort">
+                    </div>
+                    <div class="mb-3">
+                        <label for="smtpUsername" class="form-label">SMTP Kullanıcı Adı</label>
+                        <input type="text" class="form-control" id="smtpUsername" name="SmtpUsername" value="@Model.SmtpUsername">
+                    </div>
+                    <div class="mb-3">
+                        <label for="smtpPassword" class="form-label">SMTP Şifre</label>
+                        <input type="password" class="form-control" id="smtpPassword" name="SmtpPassword" value="@Model.SmtpPassword">
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="smtpSsl" name="SmtpSsl" @(Model.SmtpSsl ? "checked" : "")>
+                        <label class="form-check-label" for="smtpSsl">SSL Kullan</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailSender" class="form-label">Gönderen Email</label>
+                        <input type="email" class="form-control" id="emailSender" name="EmailSender" value="@Model.EmailSender">
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailSenderName" class="form-label">Gönderen Adı</label>
+                        <input type="text" class="form-control" id="emailSenderName" name="EmailSenderName" value="@Model.EmailSenderName">
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">Email Ayarlarını Kaydet</button>
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#testEmailModal">Test Email Gönder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Test Email Modal -->
+<div class="modal fade" id="testEmailModal" tabindex="-1" aria-labelledby="testEmailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="testEmailModalLabel">Test Email Gönder</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <form asp-controller="Admin" asp-action="SendTestEmail" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="testEmail" class="form-label">Alıcı Email</label>
+                        <input type="email" class="form-control" id="testEmail" name="testEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="testEmailSubject" class="form-label">Konu</label>
+                        <input type="text" class="form-control" id="testEmailSubject" name="testEmailSubject" value="Yerel Turlar Test Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="testEmailMessage" class="form-label">Mesaj</label>
+                        <textarea class="form-control" id="testEmailMessage" name="testEmailMessage" rows="4">Bu bir test emailidir. Email ayarlarınız düzgün çalışmaktadır.</textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="submit" class="btn btn-primary">Gönder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Banka transfer detayları toggle
+            $('#bankTransferEnabled').change(function() {
+                if ($(this).is(':checked')) {
+                    $('#bankTransferDetails').removeClass('d-none');
+                } else {
+                    $('#bankTransferDetails').addClass('d-none');
+                }
+            });
+            
+            // Başarılı/Hata mesajlarını göster
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <text>
+                toastr.success('@TempData["SuccessMessage"]');
+                </text>
+            }
+            
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <text>
+                toastr.error('@TempData["ErrorMessage"]');
+                </text>
+            }
+        });
+    </script>
+} 

@@ -15,6 +15,10 @@ body {
     background-color: #fff;
 }
 
+body.no-scroll {
+    overflow: hidden;
+}
+
 .container {
     width: 100%;
     max-width: 1200px;
@@ -51,108 +55,305 @@ header {
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    width: 100%;
 }
 
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
-.logo h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #e91e63;
+.logo {
+    z-index: 1001;
+}
+
+.logo img {
+    height: 40px;
+    border-radius: 0;
+}
+
+/* Desktop Navigation */
+.desktop-nav {
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
+    flex: 1;
+    margin-left: 30px;
+    position: relative;
 }
 
-.logo h1 i {
+.main-menu {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.main-menu li a {
+    font-weight: 500;
+    font-size: 15px;
+    color: #333;
+    transition: color 0.3s;
+    padding: 5px 0;
+    position: relative;
+}
+
+.main-menu li a:hover {
     color: #e91e63;
 }
 
-nav {
-    display: flex;
-    align-items: center;
+.main-menu li a.active {
+    color: #e91e63;
+    font-weight: 600;
 }
 
-nav ul {
+.main-menu li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #e91e63;
+    border-radius: 2px;
+}
+
+/* Giriş yapmış kullanıcı için */
+.logged-in-menu {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-nav ul li a {
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
+.welcome-text {
+    font-weight: 600;
     color: #e91e63;
-}
-
-.main-menu {
-    margin-right: 30px;
-}
-
-.dropdown {
-    position: relative;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 200px;
-    background-color: #fff;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 10px 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
+    font-size: 15px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    background-color: rgba(233, 30, 99, 0.1);
     transition: all 0.3s;
 }
 
-.dropdown-menu li {
-    padding: 0;
-}
-
-.dropdown-menu li a {
-    padding: 10px 20px;
+.nav-icons {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
-.dropdown-menu li a:hover {
-    background-color: #f8f9fa;
+.nav-icons a {
+    color: #555;
+    font-size: 18px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
 }
 
-.dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+.nav-icons a:hover {
+    color: #e91e63;
+    background-color: rgba(233, 30, 99, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Giriş yapmamış kullanıcı için */
+.auth-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.login-btn {
+    color: #555;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+
+.login-btn:hover {
+    color: #e91e63;
+    background-color: rgba(233, 30, 99, 0.1);
 }
 
 .signup-btn {
     background-color: #e91e63;
     color: #fff;
-    padding: 8px 16px;
+    padding: 8px 20px;
     border-radius: 50px;
     font-weight: 500;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(233, 30, 99, 0.2);
 }
 
 .signup-btn:hover {
     background-color: #d81b60;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(233, 30, 99, 0.3);
 }
 
-.menu-icon {
+/* Mobile menu position and animation fix */
+.mobile-menu {
     display: none;
-    font-size: 1.5rem;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    overflow-y: auto;
+    max-height: calc(100vh - 70px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-menu.active {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.mobile-menu ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.mobile-menu ul li {
+    margin-bottom: 10px;
+}
+
+.mobile-menu ul li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    font-weight: 500;
+    color: #333;
+    border-radius: 8px;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.mobile-menu ul li a i {
+    width: 20px;
+    text-align: center;
+    color: #e91e63;
+    font-size: 18px;
+}
+
+.mobile-menu ul li a:hover {
+    background-color: rgba(233, 30, 99, 0.1);
+    color: #e91e63;
+}
+
+.mobile-menu .divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 15px 0;
+}
+
+/* Hide mobile menu toggle on desktop */
+.mobile-menu-toggle {
+    display: none;
     cursor: pointer;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s;
+    background-color: rgba(233, 30, 99, 0.1);
+    margin-left: 10px;
+    z-index: 1001;
+}
+
+.mobile-menu-toggle:hover {
+    background-color: rgba(233, 30, 99, 0.2);
+}
+
+.mobile-menu-toggle i {
+    font-size: 20px;
+    color: #e91e63;
+}
+
+/* Complete separation of desktop and mobile menus */
+@media (max-width: 992px) {
+    .desktop-nav .main-menu {
+        display: none !important;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex !important;
+    }
+    
+    .desktop-nav {
+        justify-content: space-between;
+        margin-left: 0;
+    }
+    
+    .nav-right {
+    display: flex;
+        position: relative;
+        z-index: 1001;
+    }
+}
+
+@media (min-width: 993px) {
+    .mobile-menu {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-icons {
+    display: none;
+    }
+    
+    header .container {
+        padding: 0 15px;
+    }
+    
+    .logo img {
+        height: 35px;
+    }
+    
+    .auth-links .login-btn,
+    .auth-links .signup-btn {
+        display: none;
+    }
+    
+    .logged-in-menu .welcome-text,
+    .logged-in-menu .nav-icons {
+        display: none;
+    }
+    
+    .nav-right {
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 576px) {
+    .login-btn {
+        display: none;
+    }
+    
+    .signup-btn {
+        display: none;
+    }
 }
 
 /* Modern Hero Slider Section */
@@ -509,6 +710,15 @@ nav ul li a:hover {
     margin-right: auto;
 }
 
+.section-title-container.categories-title-container,
+.section-title-container.tours-title-container,
+.section-title-container.reviews-title-container,
+.section-title-container.howto-title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .section-subtitle {
     color: #ff5a5f;
     font-weight: 600;
@@ -520,6 +730,40 @@ nav ul li a:hover {
     background-color: rgba(255, 90, 95, 0.1);
     padding: 5px 15px;
     border-radius: 50px;
+}
+
+.categories-subtitle,
+.tours-subtitle,
+.reviews-subtitle,
+.howto-subtitle {
+    color: #e91e63 !important;
+    background-color: rgba(233, 30, 99, 0.1) !important;
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 10px !important;
+    display: inline-block !important;
+    position: relative !important;
+    padding: 8px 20px !important;
+    border-radius: 30px !important;
+    box-shadow: 0 3px 10px rgba(233, 30, 99, 0.1) !important;
+}
+
+.section-title-container.categories-title-container h2,
+.section-title-container.tours-title-container h2,
+.section-title-container.reviews-title-container h2,
+.section-title-container.howto-title-container h2 {
+    margin-top: 15px;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.section-title-container.categories-title-container p,
+.section-title-container.tours-title-container p,
+.section-title-container.reviews-title-container p,
+.section-title-container.howto-title-container p {
+    max-width: 600px;
+    text-align: center;
 }
 
 .section-title-container h2 {
@@ -849,74 +1093,150 @@ nav ul li a:hover {
 
 .tour-card {
     background-color: #fff;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     height: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .tour-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.tour-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.tour-card:hover::after {
+    opacity: 1;
 }
 
 .tour-image {
     position: relative;
-    height: 220px;
+    height: 240px;
     overflow: hidden;
+    background-color: #f5f5f5;
 }
 
 .tour-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.7s ease;
+    display: block;
+}
+
+.tour-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.2) 100%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tour-card:hover .tour-image::before {
+    opacity: 1;
 }
 
 .tour-card:hover .tour-image img {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
 .tour-price {
     position: absolute;
     bottom: 15px;
     right: 15px;
-    background-color: rgba(255, 90, 95, 0.9);
+    background: linear-gradient(135deg, #ff5a5f, #ff4146);
     color: #fff;
-    padding: 8px 12px;
-    border-radius: 20px;
+    padding: 8px 16px;
+    border-radius: 30px;
     font-weight: 600;
     font-size: 14px;
+    box-shadow: 0 4px 10px rgba(255, 90, 95, 0.3);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.tour-card:hover .tour-price {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(255, 90, 95, 0.4);
+}
+
+.tour-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 2;
+}
+
+.tour-badge i {
+    color: #ff5a5f;
 }
 
 .tour-content {
-    padding: 20px;
+    padding: 25px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
 .tour-title {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     color: #333;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+}
+
+.tour-card:hover .tour-title {
+    color: #ff5a5f;
 }
 
 .tour-description {
     color: #666;
     font-size: 14px;
-    margin-bottom: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
     flex-grow: 1;
 }
 
 .tour-meta {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-size: 14px;
 }
 
@@ -938,6 +1258,9 @@ nav ul li a:hover {
 .tour-duration {
     display: flex;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.03);
+    padding: 5px 10px;
+    border-radius: 20px;
 }
 
 .tour-duration i {
@@ -959,24 +1282,33 @@ nav ul li a:hover {
 }
 
 .guide-info img {
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     margin-right: 10px;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .guide-name {
     font-weight: 600;
     font-size: 14px;
+    color: #333;
 }
 
 .guide-type {
     font-size: 12px;
-    background-color: #e9f5ff;
+    background: linear-gradient(to right, #e9f5ff, #dcf0ff);
     color: #0077cc;
-    padding: 4px 8px;
-    border-radius: 4px;
+    padding: 5px 10px;
+    border-radius: 20px;
     font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.tour-card:hover .guide-type {
+    background: linear-gradient(to right, #dcf0ff, #c9e7ff);
 }
 
 /* Misafir Yorumları Bölümü */
@@ -1364,7 +1696,6 @@ nav ul li a:hover {
 }
 
 .newsletter-btn i {
-    font-size: 1.1rem;
     transition: transform 0.3s;
 }
 
@@ -1429,68 +1760,266 @@ nav ul li a:hover {
 }
 
 @media (max-width: 576px) {
-    .newsletter-content {
-        padding: 25px;
+    .user-menu li:not(.menu-icon) {
+        display: none;
     }
     
-    .newsletter-text h2 {
+    .menu-icon {
+        display: block;
+    }
+    
+    .hero-slider-section {
+        height: 500px;
+        margin-bottom: 180px;
+    }
+    
+    .hero-text h1 {
+        font-size: 1.8rem;
+    }
+    
+    .section-title-container.categories-title-container h2,
+    .section-title-container.tours-title-container h2,
+    .section-title-container.reviews-title-container h2,
+    .section-title-container.howto-title-container h2 {
         font-size: 1.5rem;
     }
     
-    .newsletter-features li {
+    .categories-subtitle,
+    .tours-subtitle,
+    .reviews-subtitle,
+    .howto-subtitle {
+        font-size: 0.7rem !important;
+        padding: 5px 12px !important;
+        letter-spacing: 1.5px !important;
+    }
+    
+    .hero-text p {
         font-size: 0.9rem;
     }
     
-    .newsletter-form-container {
-        padding: 20px;
+    .search-section {
+        margin-top: -90px;
     }
     
-    .form-group input {
-        padding: 12px 15px;
+    .search-container-simple {
+        padding: 15px;
     }
     
-    .newsletter-btn {
-        padding: 12px 20px;
+    .slider-controls {
+        bottom: 15px;
+    }
+    
+    .slider-arrow {
+        width: 30px;
+        height: 30px;
+        margin: 0 8px;
+    }
+    
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .tours-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .tour-image {
+        height: 220px;
+    }
+    
+    .tour-badge {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+    
+    .tour-price {
+        padding: 6px 12px;
+        font-size: 13px;
     }
 }
 
-/* Yerel Rehber Olun Bölümü - Yeni Tasarım */
+/* Notification Styles */
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    animation: slideDown 0.5s ease-out forwards;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.notification.success .notification-content {
+    background-color: #e8f5e9;
+    border-left: 4px solid #4caf50;
+}
+
+.notification.error .notification-content {
+    background-color: #ffebee;
+    border-left: 4px solid #f44336;
+}
+
+.notification i {
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+.notification.success i {
+    color: #4caf50;
+}
+
+.notification.error i {
+    color: #f44336;
+}
+
+.notification p {
+    flex: 1;
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0;
+    margin-left: 10px;
+    transition: color 0.3s;
+}
+
+.notification-close:hover {
+    color: #333;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .section-title-container.categories-title-container h2,
+    .section-title-container.tours-title-container h2,
+    .section-title-container.reviews-title-container h2,
+    .section-title-container.howto-title-container h2 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title-container.categories-title-container h2,
+    .section-title-container.tours-title-container h2,
+    .section-title-container.reviews-title-container h2,
+    .section-title-container.howto-title-container h2 {
+        font-size: 1.8rem;
+    }
+    
+    .categories-subtitle,
+    .tours-subtitle,
+    .reviews-subtitle,
+    .howto-subtitle {
+        font-size: 0.8rem !important;
+        padding: 6px 15px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-title-container.categories-title-container h2,
+    .section-title-container.tours-title-container h2,
+    .section-title-container.reviews-title-container h2,
+    .section-title-container.howto-title-container h2 {
+        font-size: 1.5rem;
+    }
+    
+    .categories-subtitle,
+    .tours-subtitle,
+    .reviews-subtitle,
+    .howto-subtitle {
+        font-size: 0.7rem !important;
+        padding: 5px 12px !important;
+        letter-spacing: 1.5px !important;
+    }
+}
+
+/* Yerel Rehber Olun Bölümü - Yeni Tasarım (Updated 2) */
 .become-guide-new {
     padding: 80px 0;
     text-align: center;
-    background: linear-gradient(to right, #6a1b9a, #e91e63);
+    background: #ff5a5f; /* Solid background instead of gradient for testing */
     color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.become-guide-new::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M95,50 C95,74.85 74.85,95 50,95 C25.15,95 5,74.85 5,50 C5,25.15 25.15,5 50,5 C74.85,5 95,25.15 95,50 Z" stroke="rgba(255,255,255,0.1)" stroke-width="10" fill="none"/></svg>');
+    background-size: 300px;
+    opacity: 0.3;
+}
+
+.become-guide-new .container {
+    position: relative;
+    z-index: 2;
 }
 
 .become-guide-new h2 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .become-guide-new p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto 30px;
     line-height: 1.6;
+    opacity: 0.9;
 }
 
 .guide-signup-btn {
     display: inline-block;
-    background-color: #ffc107;
-    color: #333;
-    padding: 15px 30px;
+    background-color: #fff;
+    color: #ff4146;
+    padding: 14px 28px;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1rem;
     transition: all 0.3s;
     text-decoration: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .guide-signup-btn:hover {
-    background-color: #ffca28;
+    background-color: #f8f9fa;
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Footer - Yeni Tasarım */
@@ -1579,10 +2108,10 @@ nav ul li a:hover {
 }
 
 .footer-bottom-dark {
-    background-color: #1a1a2e;
+    background-color: #ffffff;
     padding: 30px 0;
-    color: #fff;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #333;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .footer-bottom-content {
@@ -1615,23 +2144,23 @@ nav ul li a:hover {
 }
 
 .footer-links a {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(0, 0, 0, 0.7);
     font-size: 0.9rem;
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .footer-links a:hover {
-    color: #fff;
+    color: #333;
 }
 
 .footer-copyright p {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.5);
     margin: 0;
 }
 
-/* Responsive Styles for New Sections */
+/* Responsive Styles for Footer */
 @media (max-width: 992px) {
     .footer-columns {
         grid-template-columns: repeat(2, 1fr);
@@ -1645,14 +2174,6 @@ nav ul li a:hover {
     
     .become-guide-new p {
         font-size: 1rem;
-    }
-    
-    .newsletter-content {
-        flex-direction: column;
-    }
-    
-    .newsletter-form {
-        width: 100%;
     }
     
     .footer-bottom-content {
@@ -1685,252 +2206,729 @@ nav ul li a:hover {
     }
 }
 
-/* Responsive Styles */
+/* Auth Pages Styles */
+.auth-section {
+    padding: 80px 0;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+}
+
+.auth-container {
+    display: flex;
+    background-color: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+    min-height: 600px;
+}
+
+.auth-content {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.auth-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.auth-header h1:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+        left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(to right, #ff5a5f, #ff4146);
+    border-radius: 3px;
+}
+
+.auth-header p {
+    color: #666;
+    font-size: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.auth-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-group {
+    margin-bottom: 5px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.form-group .input-with-icon {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.form-group .input-with-icon:focus-within {
+    border-color: #ff5a5f;
+    box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.1);
+}
+
+.form-group .input-with-icon i {
+    color: #ff5a5f;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0 15px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.remember-me input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #ff5a5f;
+}
+
+.remember-me label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.forgot-password {
+    font-size: 0.9rem;
+    color: #ff5a5f;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.forgot-password:hover {
+    color: #e91e63;
+    text-decoration: underline;
+}
+
+.auth-btn {
+    background: linear-gradient(to right, #ff5a5f, #ff4146);
+    color: #fff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.auth-btn:hover {
+    background: linear-gradient(to right, #ff4146, #ff5a5f);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 90, 95, 0.3);
+}
+
+.auth-btn i {
+    transition: transform 0.3s;
+}
+
+.auth-btn:hover i {
+    transform: translateX(5px);
+}
+
+.social-login {
+    margin-top: 20px;
+        text-align: center;
+}
+
+.social-login p {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.social-login p:before,
+.social-login p:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    background-color: #e0e0e0;
+}
+
+.social-login p:before {
+    left: 0;
+}
+
+.social-login p:after {
+    right: 0;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+        justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.social-btn.google {
+    background-color: #fff;
+    color: #555;
+    border: 1px solid #e0e0e0;
+}
+
+.social-btn.facebook {
+    background-color: #1877f2;
+    color: #fff;
+}
+
+.social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.auth-footer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.auth-footer p {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.auth-footer a {
+    color: #ff5a5f;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.auth-footer a:hover {
+    color: #e91e63;
+    text-decoration: underline;
+}
+
+.auth-image {
+    flex: 1;
+    position: relative;
+    min-height: 100%;
+        display: none;
+    }
+    
+.auth-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+.auth-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));
+}
+
+.auth-image-content {
+    position: absolute;
+    bottom: 50px;
+    left: 40px;
+    right: 40px;
+    color: #fff;
+}
+
+.auth-image-content h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.auth-image-content p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.password-strength {
+    margin-top: 8px;
+}
+
+.strength-meter {
+    height: 4px;
+    background-color: #e0e0e0;
+    border-radius: 2px;
+    margin-bottom: 8px;
+}
+
+.strength-meter-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s, background-color 0.3s;
+}
+
+.strength-meter-fill[data-strength="0"] {
+    width: 0%;
+    background-color: transparent;
+}
+
+.strength-meter-fill[data-strength="1"] {
+    width: 25%;
+    background-color: #f44336;
+}
+
+.strength-meter-fill[data-strength="2"] {
+    width: 50%;
+    background-color: #ff9800;
+}
+
+.strength-meter-fill[data-strength="3"] {
+    width: 75%;
+    background-color: #2196f3;
+}
+
+.strength-meter-fill[data-strength="4"] {
+    width: 100%;
+    background-color: #4caf50;
+}
+
+.password-strength small {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+/* Responsive Styles for Auth Pages */
+@media (min-width: 992px) {
+    .auth-image {
+        display: block;
+    }
+}
+
 @media (max-width: 992px) {
-    .hero-text {
-        max-width: 500px;
+    .auth-container {
+        flex-direction: column-reverse;
     }
     
-    .hero-text h1 {
-        font-size: 2.8rem;
+    .auth-image {
+        display: block;
+        height: 250px;
     }
     
-    .hero-text p {
-        font-size: 1.1rem;
+    .auth-image-content {
+        bottom: 30px;
+        left: 30px;
+        right: 30px;
     }
     
-    .search-form-simple {
-        flex-wrap: wrap;
+    .auth-image-content h2 {
+        font-size: 1.5rem;
     }
     
-    .search-input-group {
-        min-width: 200px;
-    }
-    
-    .experiences-grid,
-    .become-guide-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .tours-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .auth-content {
+        padding: 40px 30px;
     }
 }
 
 @media (max-width: 768px) {
-    header .container {
+    .auth-section {
+        padding: 40px 0;
+    }
+    
+    .form-row {
         flex-direction: column;
-        gap: 20px;
+        gap: 0;
     }
     
-    nav {
-        width: 100%;
-        justify-content: space-between;
+    .auth-header h1 {
+        font-size: 1.8rem;
     }
     
-    .main-menu {
-        margin-right: 0;
+    .auth-image-content h2 {
+        font-size: 1.3rem;
     }
     
-    .hero-slider-section {
-        height: 550px;
-        margin-bottom: 150px;
-    }
-    
-    .hero-content {
-        padding: 0 5%;
-    }
-    
-    .hero-text h1 {
-        font-size: 2.2rem;
-    }
-    
-    .hero-text p {
-        font-size: 1rem;
-    }
-    
-    .hero-category-buttons {
-        flex-wrap: wrap;
-    }
-    
-    .search-section {
-        margin-top: -70px;
-    }
-    
-    .search-container-simple {
-        padding: 20px;
-    }
-    
-    .search-form-simple {
+    .form-options {
         flex-direction: column;
-        gap: 15px;
-    }
-    
-    .search-btn-simple {
-        width: 100%;
-        justify-content: center;
-        margin-top: 10px;
-    }
-    
-    .slider-controls {
-        bottom: 20px;
-    }
-    
-    .slider-arrow {
-        width: 35px;
-        height: 35px;
-        margin: 0 10px;
-    }
-    
-    .categories-grid,
-    .testimonials-grid,
-    .destinations-grid,
-    .steps-grid,
-    .footer-columns {
-        grid-template-columns: 1fr;
-    }
-    
-    .newsletter-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .newsletter-form {
-        width: 100%;
-    }
-    
-    .tours-grid {
-        grid-template-columns: 1fr;
+        align-items: flex-start;
+        gap: 10px;
     }
 }
 
 @media (max-width: 576px) {
-    .user-menu li:not(.menu-icon) {
-        display: none;
+    .auth-content {
+        padding: 30px 20px;
     }
     
-    .menu-icon {
-        display: block;
+    .auth-image {
+        height: 200px;
     }
     
-    .hero-slider-section {
-        height: 500px;
-        margin-bottom: 180px;
+    .auth-image-content {
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
     }
     
-    .hero-text h1 {
-        font-size: 1.8rem;
+    .auth-image-content h2 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
     }
     
-    .hero-text p {
+    .auth-image-content p {
         font-size: 0.9rem;
     }
     
-    .hero-category-buttons {
-        gap: 10px;
-    }
-    
-    .hero-category-button {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-    }
-    
-    .search-section {
-        margin-top: -90px;
-    }
-    
-    .search-container-simple {
-        padding: 15px;
-    }
-    
-    .slider-controls {
-        bottom: 15px;
-    }
-    
-    .slider-arrow {
-        width: 30px;
-        height: 30px;
-        margin: 0 8px;
-    }
-    
-    .dot {
-        width: 10px;
-        height: 10px;
+    .social-buttons {
+        flex-direction: column;
     }
 }
 
-/* Notification Styles */
-.notification {
-    position: fixed;
-    top: 20px;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    animation: slideDown 0.5s ease-out forwards;
-}
-
-.notification-content {
+/* Navbar Right Section */
+.nav-right {
     display: flex;
     align-items: center;
-    padding: 15px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
-    max-width: 600px;
+    gap: 15px;
 }
 
-.notification.success .notification-content {
-    background-color: #e8f5e9;
-    border-left: 4px solid #4caf50;
+/* Mobile menu container */
+.mobile-menu-container {
+    padding: 15px;
 }
 
-.notification.error .notification-content {
-    background-color: #ffebee;
-    border-left: 4px solid #f44336;
-}
-
-.notification i {
-    font-size: 20px;
-    margin-right: 15px;
-}
-
-.notification.success i {
-    color: #4caf50;
-}
-
-.notification.error i {
-    color: #f44336;
-}
-
-.notification p {
-    flex: 1;
-    margin: 0;
-    font-size: 14px;
-    color: #333;
-}
-
-.notification-close {
-    background: none;
-    border: none;
-    color: #999;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 0;
-    margin-left: 10px;
-    transition: color 0.3s;
-}
-
-.notification-close:hover {
-    color: #333;
-}
-
-@keyframes slideDown {
-    from {
-        transform: translateY(-100%);
-        opacity: 0;
+/* Update mobile menu toggle position */
+@media (max-width: 992px) {
+    nav {
+        justify-content: space-between;
+        margin-left: 0;
     }
-    to {
-        transform: translateY(0);
-        opacity: 1;
+    
+    .nav-right {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .auth-links .login-btn,
+    .auth-links .signup-btn {
+        display: none;
+    }
+    
+    .logged-in-menu .welcome-text,
+    .logged-in-menu .nav-icons {
+        display: none;
+    }
+    
+    .nav-right {
+        justify-content: flex-end;
+    }
+}
+
+.signup-btn {
+    background-color: #e91e63;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-weight: 500;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(233, 30, 99, 0.15);
+}
+
+.signup-btn:hover {
+    background-color: #d81b60;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(233, 30, 99, 0.25);
+}
+
+/* Contact Page Styles */
+.contact-section {
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.contact-info h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.contact-info p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.contact-list {
+    margin-bottom: 30px;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.contact-list li i {
+    font-size: 20px;
+    color: #e91e63;
+    margin-right: 15px;
+    margin-top: 5px;
+}
+
+.contact-list li div h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.contact-list li div p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 0;
+}
+
+.contact-form h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.contact-form .form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #333;
+    transition: all 0.3s;
+}
+
+.contact-form .form-control:focus {
+    outline: none;
+    border-color: #e91e63;
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+}
+
+.contact-form textarea.form-control {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.contact-form .submit-btn {
+    background: linear-gradient(to right, #e91e63, #d81b60);
+    color: #fff;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 150px;
+}
+
+.contact-form .submit-btn:hover {
+    background: linear-gradient(to right, #d81b60, #c2185b);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(233, 30, 99, 0.3);
+}
+
+.map-section {
+    margin-bottom: 80px;
+}
+
+.map-container {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.map-container iframe {
+    display: block;
+    border: 0;
+}
+
+/* Page hero for inner pages */
+.page-hero {
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.page-hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.page-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.page-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+}
+
+.page-hero-content {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    padding: 100px 0;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-hero-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.page-hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 992px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .page-hero-content h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 60px 0;
+    }
+    
+    .page-hero {
+        height: 300px;
+    }
+    
+    .page-hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .page-hero-content p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-section {
+        padding: 40px 0;
+    }
+    
+    .page-hero {
+        height: 250px;
+    }
+    
+    .page-hero-content {
+        padding: 80px 0;
+    }
+    
+    .page-hero-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .map-section {
+        margin-bottom: 40px;
     }
 } 

@@ -1,0 +1,307 @@
+@{
+    ViewData["Title"] = "Turlar";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/tours.css" />
+}
+
+<section class="page-hero">
+    <div class="page-hero-image">
+        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Turlar">
+        <div class="page-hero-overlay"></div>
+    </div>
+    <div class="container">
+        <div class="page-hero-content">
+            <h1>Keşfedilecek Turlar</h1>
+            <p>Yerel rehberlerimiz eşliğinde unutulmaz deneyimler yaşayın</p>
+        </div>
+    </div>
+</section>
+
+<section class="tours-filter-section">
+    <div class="container">
+        <div class="tours-search-container">
+            <form class="tours-search-form">
+                <div class="search-input-group">
+                    <label for="location">Nereye?</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" id="location" placeholder="Şehir veya Bölge">
+                    </div>
+                </div>
+                <div class="search-input-group">
+                    <label for="category">Kategori</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-list"></i>
+                        <select id="category">
+                            <option value="">Tüm Kategoriler</option>
+                            <option value="kultur">Kültür & Tarih</option>
+                            <option value="doga">Doğa & Macera</option>
+                            <option value="yemek">Yemek & Gastronomi</option>
+                            <option value="fotograf">Fotoğraf Turları</option>
+                            <option value="spor">Spor Aktiviteleri</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-input-group">
+                    <label for="date">Tarih</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-calendar"></i>
+                        <input type="text" id="date" placeholder="Tarih Seçin">
+                    </div>
+                </div>
+                <button type="submit" class="search-btn-simple">
+                    <i class="fas fa-search"></i> Ara
+                </button>
+            </form>
+        </div>
+        <div class="tours-filter-tags">
+            <span class="filter-title">Hızlı Filtreler:</span>
+            <div class="filter-tags">
+                <a href="#" class="filter-tag active">Tümü</a>
+                <a href="#" class="filter-tag">En Popüler</a>
+                <a href="#" class="filter-tag">Yeni Eklenenler</a>
+                <a href="#" class="filter-tag">En Yüksek Puanlı</a>
+                <a href="#" class="filter-tag">Fiyata Göre (Artan)</a>
+                <a href="#" class="filter-tag">Fiyata Göre (Azalan)</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="tours-listing">
+    <div class="container">
+        <div class="tours-grid">
+            <!-- Tur 1 -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1539606892513-9bac5e4807b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Kapadokya Gün Doğumu Turu">
+                    <div class="tour-badge"><i class="fas fa-certificate"></i> En Popüler</div>
+                    <div class="tour-price">₺650 / kişi</div>
+                </div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Kapadokya Gün Doğumu ve Balon Turu</h3>
+                    <p class="tour-description">Kapadokya'nın eşsiz manzarasını gün doğumunda sıcak hava balonlarının büyüleyici görüntüsü eşliğinde keşfedin. Yerel rehberlerimiz eşliğinde Kapadokya'nın gizli kalmış yerlerini görme fırsatı.</p>
+                    
+                    <div class="tour-meta">
+                        <div class="tour-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span> (128)
+                        </div>
+                        <div class="tour-duration">
+                            <i class="far fa-clock"></i> 6 saat
+                        </div>
+                    </div>
+                    
+                    <div class="tour-guide">
+                        <div class="guide-info">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Mehmet Bey">
+                            <div>
+                                <div class="guide-name">Mehmet Bey</div>
+                            </div>
+                        </div>
+                        <div class="guide-type">Yerel Rehber</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tur 2 -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1615460549969-36fa19521a4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="İstanbul Lezzet Turu">
+                    <div class="tour-badge"><i class="fas fa-utensils"></i> Yemek</div>
+                    <div class="tour-price">₺450 / kişi</div>
+                </div>
+                <div class="tour-content">
+                    <h3 class="tour-title">İstanbul Lezzet Turu: Eminönü'nden Karaköy'e</h3>
+                    <p class="tour-description">İstanbul'un tarihi yarımadasında yerel lezzetleri tadın. Eminönü'nden başlayıp Karaköy'e uzanan bu turda, sokak yemeklerinden meşhur restoranlara kadar birçok lezzeti deneyimleyin.</p>
+                    
+                    <div class="tour-meta">
+                        <div class="tour-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span> (97)
+                        </div>
+                        <div class="tour-duration">
+                            <i class="far fa-clock"></i> 4 saat
+                        </div>
+                    </div>
+                    
+                    <div class="tour-guide">
+                        <div class="guide-info">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1061&q=80" alt="Ayşe Hanım">
+                            <div>
+                                <div class="guide-name">Ayşe Hanım</div>
+                            </div>
+                        </div>
+                        <div class="guide-type">Gastronomi Uzmanı</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tur 3 -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1519451241324-20b4ea2c4220?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Efes Antik Kenti Turu">
+                    <div class="tour-badge"><i class="fas fa-landmark"></i> Kültür</div>
+                    <div class="tour-price">₺550 / kişi</div>
+                </div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Efes Antik Kenti ve Şirince Köyü Turu</h3>
+                    <p class="tour-description">Dünya'nın en iyi korunmuş antik kentlerinden Efes'i keşfedin ve ardından şirin bir Rum köyü olan Şirince'de yerel tatlara göz atın. Tarih ve kültür dolu bu tur sizi büyüleyecek.</p>
+                    
+                    <div class="tour-meta">
+                        <div class="tour-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.7</span> (84)
+                        </div>
+                        <div class="tour-duration">
+                            <i class="far fa-clock"></i> 8 saat
+                        </div>
+                    </div>
+                    
+                    <div class="tour-guide">
+                        <div class="guide-info">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Ali Bey">
+                            <div>
+                                <div class="guide-name">Ali Bey</div>
+                            </div>
+                        </div>
+                        <div class="guide-type">Tarih Uzmanı</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tur 4 -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1527825280588-d9b0d6de6b89?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Sapanca Doğa Yürüyüşü">
+                    <div class="tour-badge"><i class="fas fa-hiking"></i> Doğa</div>
+                    <div class="tour-price">₺300 / kişi</div>
+                </div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Sapanca Gölü ve Maşukiye Doğa Yürüyüşü</h3>
+                    <p class="tour-description">İstanbul'a yakın doğal güzellikleri keşfedin. Sapanca Gölü etrafında yürüyüş ve Maşukiye'de yerel köy kahvaltısı ile gününüzü doğayla iç içe geçirin.</p>
+                    
+                    <div class="tour-meta">
+                        <div class="tour-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.6</span> (71)
+                        </div>
+                        <div class="tour-duration">
+                            <i class="far fa-clock"></i> 7 saat
+                        </div>
+                    </div>
+                    
+                    <div class="tour-guide">
+                        <div class="guide-info">
+                            <img src="https://images.unsplash.com/photo-1533689476487-034f57831a58?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Zeynep Hanım">
+                            <div>
+                                <div class="guide-name">Zeynep Hanım</div>
+                            </div>
+                        </div>
+                        <div class="guide-type">Doğa Rehberi</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tur 5 -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2148&q=80" alt="Kaş Mavi Tur">
+                    <div class="tour-badge"><i class="fas fa-water"></i> Deniz</div>
+                    <div class="tour-price">₺750 / kişi</div>
+                </div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Kaş & Kekova Tekne Turu</h3>
+                    <p class="tour-description">Türkiye'nin berrak sularında yüzme, tarihi batık şehrin kalıntılarını görme ve eşsiz koylarda tekneyle seyir keyfi. Deniz, güneş ve tarih bir arada.</p>
+                    
+                    <div class="tour-meta">
+                        <div class="tour-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span> (112)
+                        </div>
+                        <div class="tour-duration">
+                            <i class="far fa-clock"></i> 8 saat
+                        </div>
+                    </div>
+                    
+                    <div class="tour-guide">
+                        <div class="guide-info">
+                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="Kemal Kaptan">
+                            <div>
+                                <div class="guide-name">Kemal Kaptan</div>
+                            </div>
+                        </div>
+                        <div class="guide-type">Deniz Rehberi</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tur 6 -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1573499216444-07ece7d18101?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="İstanbul Fotoğraf Turu">
+                    <div class="tour-badge"><i class="fas fa-camera"></i> Fotoğraf</div>
+                    <div class="tour-price">₺400 / kişi</div>
+                </div>
+                <div class="tour-content">
+                    <h3 class="tour-title">İstanbul Fotoğraf Turu: Tarihi Yarımada</h3>
+                    <p class="tour-description">Profesyonel bir fotoğrafçı eşliğinde İstanbul'un en fotojenik yerlerini keşfedin. Tarihi yarımadanın büyüleyici manzaralarını ölümsüzleştirme fırsatı.</p>
+                    
+                    <div class="tour-meta">
+                        <div class="tour-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span> (63)
+                        </div>
+                        <div class="tour-duration">
+                            <i class="far fa-clock"></i> 5 saat
+                        </div>
+                    </div>
+                    
+                    <div class="tour-guide">
+                        <div class="guide-info">
+                            <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Selin Hanım">
+                            <div>
+                                <div class="guide-name">Selin Hanım</div>
+                            </div>
+                        </div>
+                        <div class="guide-type">Fotoğraf Uzmanı</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pagination-container">
+            <ul class="pagination">
+                <li class="page-item disabled"><a href="#" class="page-link"><i class="fas fa-chevron-left"></i></a></li>
+                <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                <li class="page-item"><a href="#" class="page-link">2</a></li>
+                <li class="page-item"><a href="#" class="page-link">3</a></li>
+                <li class="page-item"><a href="#" class="page-link">4</a></li>
+                <li class="page-item"><a href="#" class="page-link">5</a></li>
+                <li class="page-item"><a href="#" class="page-link"><i class="fas fa-chevron-right"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Date picker için
+            $('#date').datepicker({
+                format: 'dd/mm/yyyy',
+                language: 'tr',
+                autoclose: true
+            });
+            
+            // Filtre tagları aktifleştirme
+            $('.filter-tag').click(function(e) {
+                e.preventDefault();
+                $('.filter-tag').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
+} 

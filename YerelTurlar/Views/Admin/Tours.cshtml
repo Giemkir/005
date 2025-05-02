@@ -1,0 +1,518 @@
+@model IEnumerable<YerelTurlar.Models.Tour>
+@using Microsoft.EntityFrameworkCore
+@{
+    ViewData["Title"] = "Turlar";
+    Layout = "_AdminLayout";
+}
+
+<!-- Turlar Başlık ve Özet -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div>
+        <h1 class="h3 mb-0 text-gray-800">Turlar</h1>
+        <p class="text-muted">Tüm turları bu sayfadan yönetebilirsiniz.</p>
+    </div>
+    <button type="button" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#addTourModal">
+        <i class="fas fa-plus fa-sm text-white-50 me-2"></i>Yeni Tur Ekle
+    </button>
+</div>
+
+<!-- Filtreler -->
+<div class="dashboard-card mb-4">
+    <div class="dashboard-card-header py-3">
+        <h3 class="m-0">Filtreler</h3>
+    </div>
+    <div class="dashboard-card-body">
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label for="categoryFilter" class="form-label">Kategori</label>
+                <select class="form-select" id="categoryFilter">
+                    <option value="">Tümü</option>
+                    @foreach (var category in ViewBag.Categories ?? new List<YerelTurlar.Models.Category>())
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="locationFilter" class="form-label">Konum</label>
+                <select class="form-select" id="locationFilter">
+                    <option value="">Tümü</option>
+                    @{
+                        var locations = Model.Select(t => t.Location).Distinct().OrderBy(l => l);
+                    }
+                    @foreach (var location in locations)
+                    {
+                        <option value="@location">@location</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="statusFilter" class="form-label">Durum</label>
+                <select class="form-select" id="statusFilter">
+                    <option value="">Tümü</option>
+                    <option value="true">Aktif</option>
+                    <option value="false">Pasif</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="featuredFilter" class="form-label">Öne Çıkan</label>
+                <select class="form-select" id="featuredFilter">
+                    <option value="">Tümü</option>
+                    <option value="true">Evet</option>
+                    <option value="false">Hayır</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Turlar Tablosu -->
+<div class="dashboard-card mb-4">
+    <div class="dashboard-card-header py-3">
+        <h3 class="m-0">Tüm Turlar</h3>
+    </div>
+    <div class="dashboard-card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover" id="toursTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tur</th>
+                        <th>Kategori</th>
+                        <th>Konum</th>
+                        <th>Fiyat</th>
+                        <th>İnd. Fiyat</th>
+                        <th>Öne Çıkan</th>
+                        <th>Durum</th>
+                        <th>Tarih</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var tour in Model)
+                    {
+                        <tr>
+                            <td>@tour.Id</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    @if (!string.IsNullOrEmpty(tour.ImageUrl))
+                                    {
+                                        <img src="@tour.ImageUrl" class="rounded me-2" width="40" height="40" alt="@tour.Name">
+                                    }
+                                    <span>@tour.Name</span>
+                                </div>
+                            </td>
+                            <td>@(tour.Category?.Name ?? "-")</td>
+                            <td>@tour.Location</td>
+                            <td>@tour.Price.ToString("C")</td>
+                            <td>@(tour.DiscountedPrice.HasValue ? tour.DiscountedPrice.Value.ToString("C") : "-")</td>
+                            <td>
+                                @if (tour.IsFeatured)
+                                {
+                                    <span class="badge bg-info">Evet</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Hayır</span>
+                                }
+                            </td>
+                            <td>
+                                @if (tour.IsActive)
+                                {
+                                    <span class="badge bg-success">Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Pasif</span>
+                                }
+                            </td>
+                            <td>@tour.CreatedAt.ToString("dd.MM.yyyy")</td>
+                            <td>
+                                <div class="d-flex">
+                                    <button type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#editTourModal" data-id="@tour.Id">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteTourModal" data-id="@tour.Id">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Tur Ekle Modal -->
+<div class="modal fade" id="addTourModal" tabindex="-1" aria-labelledby="addTourModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addTourModalLabel">Yeni Tur Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <form asp-controller="Admin" asp-action="AddTour" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="name" class="form-label">Tur Adı <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="name" name="Name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="categoryId" class="form-label">Kategori <span class="text-danger">*</span></label>
+                                <select class="form-select" id="categoryId" name="CategoryId" required>
+                                    <option value="">Seçiniz</option>
+                                    @foreach (var category in ViewBag.Categories ?? new List<YerelTurlar.Models.Category>())
+                                    {
+                                        <option value="@category.Id">@category.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="description" class="form-label">Açıklama</label>
+                        <textarea class="form-control" id="description" name="Description" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="price" class="form-label">Fiyat <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">₺</span>
+                                    <input type="number" class="form-control" id="price" name="Price" step="0.01" min="0" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="discountedPrice" class="form-label">İndirimli Fiyat</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">₺</span>
+                                    <input type="number" class="form-control" id="discountedPrice" name="DiscountedPrice" step="0.01" min="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="location" class="form-label">Konum</label>
+                                <input type="text" class="form-control" id="location" name="Location">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="duration" class="form-label">Süre</label>
+                                <input type="text" class="form-control" id="duration" name="Duration" placeholder="örn: 3 saat, 2 gün">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="maxParticipants" class="form-label">Maksimum Katılımcı</label>
+                                <input type="number" class="form-control" id="maxParticipants" name="MaxParticipants" min="1" value="10">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="guideId" class="form-label">Rehber</label>
+                                <select class="form-select" id="guideId" name="GuideId">
+                                    <option value="">Seçiniz</option>
+                                    @foreach (var guide in ViewBag.Guides ?? new List<YerelTurlar.Models.User>())
+                                    {
+                                        <option value="@guide.Id">@guide.FirstName @guide.LastName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="imageFile" class="form-label">Tur Görseli</label>
+                        <input type="file" class="form-control" id="imageFile" name="ImageFile">
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="isFeatured" name="IsFeatured">
+                                <label class="form-check-label" for="isFeatured">
+                                    Öne Çıkan
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="isActive" name="IsActive" checked>
+                                <label class="form-check-label" for="isActive">
+                                    Aktif
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="submit" class="btn btn-primary">Tur Ekle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Tur Düzenle Modal -->
+<div class="modal fade" id="editTourModal" tabindex="-1" aria-labelledby="editTourModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editTourModalLabel">Tur Düzenle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <form asp-controller="Admin" asp-action="EditTour" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <input type="hidden" id="editId" name="Id">
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="editName" class="form-label">Tur Adı <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="editName" name="Name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="editCategoryId" class="form-label">Kategori <span class="text-danger">*</span></label>
+                                <select class="form-select" id="editCategoryId" name="CategoryId" required>
+                                    <option value="">Seçiniz</option>
+                                    @foreach (var category in ViewBag.Categories ?? new List<YerelTurlar.Models.Category>())
+                                    {
+                                        <option value="@category.Id">@category.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="editDescription" class="form-label">Açıklama</label>
+                        <textarea class="form-control" id="editDescription" name="Description" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="editPrice" class="form-label">Fiyat <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">₺</span>
+                                    <input type="number" class="form-control" id="editPrice" name="Price" step="0.01" min="0" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="editDiscountedPrice" class="form-label">İndirimli Fiyat</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">₺</span>
+                                    <input type="number" class="form-control" id="editDiscountedPrice" name="DiscountedPrice" step="0.01" min="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="editLocation" class="form-label">Konum</label>
+                                <input type="text" class="form-control" id="editLocation" name="Location">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="editDuration" class="form-label">Süre</label>
+                                <input type="text" class="form-control" id="editDuration" name="Duration">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="editMaxParticipants" class="form-label">Maksimum Katılımcı</label>
+                                <input type="number" class="form-control" id="editMaxParticipants" name="MaxParticipants" min="1">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="editGuideId" class="form-label">Rehber</label>
+                                <select class="form-select" id="editGuideId" name="GuideId">
+                                    <option value="">Seçiniz</option>
+                                    @foreach (var guide in ViewBag.Guides ?? new List<YerelTurlar.Models.User>())
+                                    {
+                                        <option value="@guide.Id">@guide.FirstName @guide.LastName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="editImageFile" class="form-label">Tur Görseli</label>
+                        <input type="file" class="form-control" id="editImageFile" name="ImageFile">
+                        <div class="mt-2" id="currentImage">
+                            <small class="form-text text-muted">Mevcut görsel: <span id="currentImageName"></span></small>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="editIsFeatured" name="IsFeatured">
+                                <label class="form-check-label" for="editIsFeatured">
+                                    Öne Çıkan
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="editIsActive" name="IsActive">
+                                <label class="form-check-label" for="editIsActive">
+                                    Aktif
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Tur Sil Modal -->
+<div class="modal fade" id="deleteTourModal" tabindex="-1" aria-labelledby="deleteTourModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteTourModalLabel">Turu Sil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bu turu silmek istediğinize emin misiniz? Bu işlem geri alınamaz.</p>
+                <p class="text-danger">Uyarı: Bu tura ait rezervasyonlar ve değerlendirmeler de silinecektir.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                <form asp-controller="Admin" asp-action="DeleteTour" method="post">
+                    <input type="hidden" id="deleteId" name="id">
+                    <button type="submit" class="btn btn-danger">Turu Sil</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // DataTable'ı başlat
+            var table = $('#toursTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json'
+                },
+                order: [[0, 'desc']]
+            });
+            
+            // Kategori filtresi değiştiğinde
+            $('#categoryFilter').on('change', function() {
+                var categoryId = $(this).val();
+                table.column(2).search(categoryId ? $(this).find('option:selected').text() : '').draw();
+            });
+            
+            // Konum filtresi değiştiğinde
+            $('#locationFilter').on('change', function() {
+                table.column(3).search($(this).val()).draw();
+            });
+            
+            // Durum filtresi değiştiğinde
+            $('#statusFilter').on('change', function() {
+                var status = $(this).val();
+                if (status === 'true') {
+                    table.column(7).search('Aktif').draw();
+                } else if (status === 'false') {
+                    table.column(7).search('Pasif').draw();
+                } else {
+                    table.column(7).search('').draw();
+                }
+            });
+            
+            // Öne Çıkan filtresi değiştiğinde
+            $('#featuredFilter').on('change', function() {
+                var featured = $(this).val();
+                if (featured === 'true') {
+                    table.column(6).search('Evet').draw();
+                } else if (featured === 'false') {
+                    table.column(6).search('Hayır').draw();
+                } else {
+                    table.column(6).search('').draw();
+                }
+            });
+            
+            // Tur düzenleme modalını açarken mevcut verileri doldur
+            $('#editTourModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var tourId = button.data('id');
+                var modal = $(this);
+                
+                // AJAX ile tur bilgilerini çek
+                $.ajax({
+                    url: '/Admin/GetTour',
+                    type: 'GET',
+                    data: { id: tourId },
+                    success: function(data) {
+                        modal.find('#editId').val(data.id);
+                        modal.find('#editName').val(data.name);
+                        modal.find('#editCategoryId').val(data.categoryId);
+                        modal.find('#editDescription').val(data.description);
+                        modal.find('#editPrice').val(data.price);
+                        modal.find('#editDiscountedPrice').val(data.discountedPrice);
+                        modal.find('#editLocation').val(data.location);
+                        modal.find('#editDuration').val(data.duration);
+                        modal.find('#editMaxParticipants').val(data.maxParticipants);
+                        modal.find('#editGuideId').val(data.guideId);
+                        modal.find('#editIsFeatured').prop('checked', data.isFeatured);
+                        modal.find('#editIsActive').prop('checked', data.isActive);
+                        
+                        if (data.imageUrl) {
+                            modal.find('#currentImageName').text(data.imageUrl.split('/').pop());
+                            modal.find('#currentImage').show();
+                        } else {
+                            modal.find('#currentImage').hide();
+                        }
+                    }
+                });
+            });
+            
+            // Tur silme modalını açarken ID'yi doldur
+            $('#deleteTourModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var tourId = button.data('id');
+                var modal = $(this);
+                modal.find('#deleteId').val(tourId);
+            });
+        });
+    </script>
+} 

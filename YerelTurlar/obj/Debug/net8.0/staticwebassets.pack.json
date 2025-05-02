@@ -5,6 +5,18 @@
       "PackagePath": "staticwebassets\\YerelTurlar.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\zelfi\\OneDrive\\Belgeler\\GitHub\\005\\YerelTurlar\\wwwroot\\css\\admin.css",
+      "PackagePath": "staticwebassets\\css\\admin.css"
+    },
+    {
+      "Id": "C:\\Users\\zelfi\\OneDrive\\Belgeler\\GitHub\\005\\YerelTurlar\\wwwroot\\css\\auth.css",
+      "PackagePath": "staticwebassets\\css\\auth.css"
+    },
+    {
+      "Id": "C:\\Users\\zelfi\\OneDrive\\Belgeler\\GitHub\\005\\YerelTurlar\\wwwroot\\css\\categories.css",
+      "PackagePath": "staticwebassets\\css\\categories.css"
+    },
+    {
       "Id": "C:\\Users\\zelfi\\OneDrive\\Belgeler\\GitHub\\005\\YerelTurlar\\wwwroot\\css\\destinations.css",
       "PackagePath": "staticwebassets\\css\\destinations.css"
     },
@@ -29,8 +41,28 @@
       "PackagePath": "staticwebassets\\css\\styles.css"
     },
     {
+      "Id": "C:\\Users\\zelfi\\OneDrive\\Belgeler\\GitHub\\005\\YerelTurlar\\wwwroot\\css\\tours.css",
+      "PackagePath": "staticwebassets\\css\\tours.css"
+    },
+    {
       "Id": "C:\\Users\\zelfi\\OneDrive\\Belgeler\\GitHub\\005\\YerelTurlar\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\zelfi\\OneDrive\\Belgeler\\GitHub\\005\\YerelTurlar\\wwwroot\\images\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\zelfi\\OneDrive\\Belgeler\\GitHub\\005\\YerelTurlar\\wwwroot\\images\\logo.svg",
+      "PackagePath": "staticwebassets\\images\\logo.svg"
+    },
+    {
+      "Id": "C:\\Users\\zelfi\\OneDrive\\Belgeler\\GitHub\\005\\YerelTurlar\\wwwroot\\img\\admin-login-bg.jpg",
+      "PackagePath": "staticwebassets\\img\\admin-login-bg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\zelfi\\OneDrive\\Belgeler\\GitHub\\005\\YerelTurlar\\wwwroot\\js\\admin.js",
+      "PackagePath": "staticwebassets\\js\\admin.js"
     },
     {
       "Id": "C:\\Users\\zelfi\\OneDrive\\Belgeler\\GitHub\\005\\YerelTurlar\\wwwroot\\js\\site.js",
