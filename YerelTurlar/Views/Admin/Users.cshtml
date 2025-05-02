@@ -1,0 +1,120 @@
+@model IEnumerable<YerelTurlar.Models.User>
+@{
+    ViewData["Title"] = "Kullanıcı Yönetimi";
+    Layout = "_AdminLayout";
+}
+
+<div class="dashboard-header">
+    <h1>Kullanıcı Yönetimi</h1>
+    <p>Sistemdeki kullanıcıları görüntüleyebilir, düzenleyebilir ve yönetebilirsiniz.</p>
+</div>
+
+<div class="dashboard-card">
+    <div class="dashboard-card-header d-flex justify-content-between align-items-center">
+        <h3>Tüm Kullanıcılar</h3>
+        <a href="@Url.Action("CreateUser", "Admin")" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Yeni Kullanıcı
+        </a>
+    </div>
+    <div class="dashboard-card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ad Soyad</th>
+                        <th>Email</th>
+                        <th>Telefon</th>
+                        <th>Kayıt Tarihi</th>
+                        <th>Admin</th>
+                        <th>Durum</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Id</td>
+                            <td>@user.FirstName @user.LastName</td>
+                            <td>@user.Email</td>
+                            <td>@user.Phone</td>
+                            <td>@user.CreatedAt.ToString("dd.MM.yyyy")</td>
+                            <td>
+                                @if (user.IsAdmin)
+                                {
+                                    <span class="badge bg-primary">Evet</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Hayır</span>
+                                }
+                            </td>
+                            <td>
+                                @if (user.IsActive)
+                                {
+                                    <span class="badge bg-success">Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Pasif</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="@Url.Action("EditUser", "Admin", new { id = user.Id })" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Düzenle">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="@Url.Action("UserDetails", "Admin", new { id = user.Id })" class="btn btn-sm btn-info" data-toggle="tooltip" title="Detaylar">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-danger delete-confirm" data-id="@user.Id" data-type="kullanıcı" data-toggle="tooltip" title="Sil">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                                
+                                <!-- Form for delete action -->
+                                <form id="delete-form-@user.Id" action="@Url.Action("DeleteUser", "Admin")" method="post" style="display: none;">
+                                    <input type="hidden" name="id" value="@user.Id" />
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Kullanıcıyı Sil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bu kullanıcıyı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Evet, Sil</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // DataTable entegrasyonu
+            $('.table').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json'
+                },
+                responsive: true
+            });
+        });
+    </script>
+} 

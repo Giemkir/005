@@ -1,0 +1,40 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Hata";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="error-container text-center">
+        <h1 class="text-danger">Hata!</h1>
+        <h2 class="text-danger">İşleminiz sırasında bir hata oluştu.</h2>
+
+        @if (Model != null && Model.ShowRequestId)
+        {
+            <p>
+                <strong>Request ID:</strong> <code>@Model.RequestId</code>
+            </p>
+        }
+
+        <div class="mt-4">
+            <h3>Hata Detayları</h3>
+            <p>
+                Üzgünüz, işleminiz sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyin veya 
+                sistem yöneticisiyle iletişime geçin.
+            </p>
+            <a href="/" class="btn btn-primary">Ana Sayfaya Dön</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .error-container {
+        padding: 2rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .text-danger {
+        color: #dc3545;
+    }
+</style>

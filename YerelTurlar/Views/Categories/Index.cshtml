@@ -1,0 +1,193 @@
+@{
+    ViewData["Title"] = "Kategoriler";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/categories.css" />
+    <style>
+        
+        .category-card .category-image {
+            position: relative;
+            height: 200px;
+            background-color: #f0f0f0;
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+}
+
+<!-- Hero Bölümü -->
+<section class="categories-hero">
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="hero-content">
+            <h1>Kategoriler</h1>
+            <p>İlgi alanınıza göre yerel turları keşfedin</p>
+        </div>
+    </div>
+</section>
+
+<!-- Filtre Bölümü -->
+<section class="category-filter">
+    <div class="container">
+        <div class="filter-container">
+            <div class="search-box">
+                <input type="text" placeholder="Kategori ara...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="sort-options">
+                <select>
+                    <option value="popular">Popülerliğe Göre</option>
+                    <option value="az">A-Z</option>
+                    <option value="za">Z-A</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Kategoriler Bölümü -->
+<section class="categories-section">
+    <div class="container">
+        <div class="categories-title-container">
+            <h2 class="section-title">Tüm Kategoriler</h2>
+            <p class="section-subtitle">İlgi alanınıza göre benzersiz deneyimler keşfedin</p>
+        </div>
+        
+        <div class="categories-grid">
+            <!-- Kültür Kategorisi -->
+            <div class="category-card">
+                <a href="/Categories/Details/kultur">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1624226836164-6269f6d5d88b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+                        <div class="category-overlay">
+                            <i class="fas fa-landmark"></i>
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>Kültür</h3>
+                        <p>Tarihi ve kültürel miras turları</p>
+                        <span class="tour-count">24 Tur</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Yemek Kategorisi -->
+            <div class="category-card">
+                <a href="/Categories/Details/yemek">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1555126634-323283e090fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80');">
+                        <div class="category-overlay">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>Yemek</h3>
+                        <p>Yerel lezzetler ve gastronomi turları</p>
+                        <span class="tour-count">18 Tur</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Doğa Kategorisi -->
+            <div class="category-card">
+                <a href="/Categories/Details/doga">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1173&q=80');">
+                        <div class="category-overlay">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>Doğa</h3>
+                        <p>Doğa yürüyüşleri ve kamp turları</p>
+                        <span class="tour-count">15 Tur</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Spor Kategorisi -->
+            <div class="category-card">
+                <a href="/Categories/Details/spor">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80');">
+                        <div class="category-overlay">
+                            <i class="fas fa-running"></i>
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>Spor</h3>
+                        <p>Macera ve spor aktiviteleri</p>
+                        <span class="tour-count">12 Tur</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Fotoğraf Kategorisi -->
+            <div class="category-card">
+                <a href="/Categories/Details/fotograf">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');">
+                        <div class="category-overlay">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>Fotoğraf</h3>
+                        <p>Fotoğraf çekim turları</p>
+                        <span class="tour-count">9 Tur</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Sanat Kategorisi -->
+            <div class="category-card">
+                <a href="/Categories/Details/sanat">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80');">
+                        <div class="category-overlay">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>Sanat</h3>
+                        <p>Sanat ve el sanatları turları</p>
+                        <span class="tour-count">7 Tur</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Arama fonksiyonu
+            $('.search-box input').on('keyup', function() {
+                var value = $(this).val().toLowerCase();
+                $('.category-card').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+            
+            // Sıralama fonksiyonu
+            $('.sort-options select').on('change', function() {
+                var sortBy = $(this).val();
+                var $grid = $('.categories-grid');
+                var $cards = $grid.children('.category-card').get();
+                
+                $cards.sort(function(a, b) {
+                    if (sortBy === 'az') {
+                        return $(a).find('h3').text().localeCompare($(b).find('h3').text());
+                    } else if (sortBy === 'za') {
+                        return $(b).find('h3').text().localeCompare($(a).find('h3').text());
+                    } else {
+                        // Popülerliğe göre (tur sayısına göre)
+                        var countA = parseInt($(a).find('.tour-count').text());
+                        var countB = parseInt($(b).find('.tour-count').text());
+                        return countB - countA;
+                    }
+                });
+                
+                $.each($cards, function(idx, card) {
+                    $grid.append(card);
+                });
+            });
+        });
+    </script>
+} 

@@ -1,0 +1,911 @@
+/* Modern Kimlik Doğrulama Sayfaları Stilleri - YerelTurlar */
+
+/* Reset ve Temel Stiller */
+.auth-body {
+    background-color: #f8fafc;
+    background-image: linear-gradient(135deg, #f8fafc 0%, #fff0f0 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #2d3748;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Logo Bölümü */
+.auth-logo {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.auth-logo h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ff6b6b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.auth-logo h1:hover {
+    transform: translateY(-2px);
+}
+
+.auth-logo i {
+    font-size: 1.5rem;
+    color: #ff6b6b;
+}
+
+/* Ana Konteyner */
+.auth-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 10px;
+    background-color: transparent;
+}
+
+.auth-container {
+    display: flex;
+    background-color: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    min-height: 580px;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.auth-content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+    background: #ffffff;
+}
+
+/* Başlık */
+.auth-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.auth-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ff6b6b;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+    letter-spacing: -0.5px;
+}
+
+.auth-header-decoration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+    gap: 15px;
+}
+
+.auth-header-decoration .line {
+    height: 2px;
+    width: 40px;
+    background: linear-gradient(90deg, transparent, #ff6b6b, transparent);
+    border-radius: 2px;
+}
+
+.auth-header-decoration i {
+    color: #ff6b6b;
+    font-size: 1.2rem;
+    transform: rotate(30deg);
+}
+
+.auth-header p {
+    color: #4a5568;
+    font-size: 0.95rem;
+    max-width: 360px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Tablar */
+.auth-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    position: relative;
+    border-radius: 10px;
+    background-color: #fff0f0;
+    padding: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.auth-tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 12px 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4a5568;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.auth-tab-btn i {
+    font-size: 0.9rem;
+}
+
+.auth-tab-btn.active {
+    color: white;
+    background-color: #ff6b6b;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Tab İçeriği */
+.tab-content {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Form Alanları */
+.form-floating {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-container {
+    position: relative;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    background-color: white;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.input-container i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #718096;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.input-container input {
+    width: 100%;
+    height: 56px;
+    padding: 26px 16px 10px 46px;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: transparent;
+    color: #2d3748;
+    position: relative;
+    z-index: 1;
+}
+
+.input-container label {
+    position: absolute;
+    left: 46px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #718096;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.input-container.focused label,
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+    top: 30%;
+    font-size: 0.75rem;
+    color: #ff6b6b;
+    font-weight: 600;
+}
+
+.input-container.focused i,
+.input-container input:focus ~ i {
+    color: #ff6b6b;
+}
+
+.input-container:hover {
+    border-color: #cbd5e0;
+}
+
+.input-container.focused,
+.input-container:focus-within {
+    border-color: #ff6b6b;
+    box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.1);
+}
+
+.input-focus-bg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: #fff0f0;
+    transition: all 0.3s ease;
+    z-index: 0;
+}
+
+.input-container.focused .input-focus-bg,
+.input-container:focus-within .input-focus-bg {
+    height: 100%;
+}
+
+/* Şifre Göster/Gizle */
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #718096;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+    font-size: 0.9rem;
+    padding: 3px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.toggle-password:hover,
+.toggle-password:focus {
+    color: #ff6b6b;
+    background-color: rgba(255, 107, 107, 0.05);
+}
+
+/* Form Seçenekleri */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Özel Checkbox */
+.custom-checkbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.custom-checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-icon {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.custom-checkbox input:checked ~ label .checkbox-icon {
+    background-color: #ff6b6b;
+    border-color: #ff6b6b;
+}
+
+.checkbox-icon i {
+    font-size: 0.7rem;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+}
+
+.custom-checkbox input:checked ~ label .checkbox-icon i {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.checkbox-text {
+    font-size: 0.9rem;
+    color: #4a5568;
+    transition: all 0.3s ease;
+}
+
+.custom-checkbox:hover .checkbox-text {
+    color: #ff6b6b;
+}
+
+/* Şifremi Unuttum */
+.forgot-password {
+    font-size: 0.9rem;
+    color: #ff6b6b;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.forgot-password i {
+    font-size: 0.8rem;
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+}
+
+.forgot-password:hover {
+    color: #ff5252;
+}
+
+.forgot-password:hover i {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Giriş Butonu */
+.auth-btn {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    height: 56px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.auth-btn span {
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.auth-btn:hover {
+    background-color: #ff5252;
+    box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+.auth-btn:hover .btn-icon {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: rotate(360deg);
+}
+
+.auth-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Sosyal Giriş */
+.social-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    height: 56px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.social-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.social-btn span {
+    flex: 1;
+    text-align: center;
+    padding: 0 15px;
+}
+
+.social-btn.google {
+    background-color: white;
+    color: #2d3748;
+    border: 1px solid #e2e8f0;
+}
+
+.social-btn.google .social-icon {
+    background-color: #f1f5f9;
+    color: #ea4335;
+}
+
+.social-btn.facebook {
+    background-color: #1877f2;
+    color: white;
+}
+
+.social-btn.facebook .social-icon {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.social-btn.apple {
+    background-color: #000;
+    color: white;
+}
+
+.social-btn.apple .social-icon {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.social-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.social-btn.google:hover {
+    border-color: #dadce0;
+    background-color: #f8f9fa;
+}
+
+.social-btn.facebook:hover {
+    background-color: #166fe5;
+}
+
+.social-btn.apple:hover {
+    background-color: #333;
+}
+
+/* Footer */
+.auth-footer {
+    margin-top: auto;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.auth-footer-decoration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.auth-footer-decoration .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #ff6b6b;
+    opacity: 0.7;
+}
+
+.auth-footer-decoration .dot:nth-child(2) {
+    width: 8px;
+    height: 8px;
+    opacity: 0.9;
+}
+
+.auth-footer p {
+    font-size: 0.95rem;
+    color: #4a5568;
+}
+
+.auth-footer a {
+    color: #ff6b6b;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.auth-footer a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ff6b6b;
+    transition: all 0.3s ease;
+}
+
+.auth-footer a:hover {
+    color: #ff5252;
+}
+
+.auth-footer a:hover::after {
+    width: 100%;
+}
+
+/* Ana Sayfaya Dön Linki */
+.auth-back-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.auth-back-link a {
+    color: #4a5568;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.auth-back-link a:hover {
+    color: #ff6b6b;
+}
+
+/* Sağ Bölüm Görselleri */
+.auth-image {
+    width: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.image-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.image-slide.active {
+    opacity: 1;
+}
+
+.image-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.01);
+    transition: transform 6s ease;
+}
+
+.image-slide.active img {
+    transform: scale(1.1);
+}
+
+.auth-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3));
+    z-index: 1;
+}
+
+.image-location-tag {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 30px;
+    padding: 6px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2d3748;
+    font-size: 0.85rem;
+    font-weight: 500;
+    z-index: 2;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.image-location-tag i {
+    color: #ff6b6b;
+}
+
+.image-dots {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.image-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.image-dots .dot.active {
+    background-color: white;
+    transform: scale(1.4);
+}
+
+.auth-image-content {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    padding: 0 30px;
+    z-index: 2;
+    color: white;
+    text-align: center;
+}
+
+.auth-image-content h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.auth-image-content p {
+    font-size: 1rem;
+    opacity: 0.9;
+    max-width: 300px;
+    margin: 0 auto 20px;
+    line-height: 1.5;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.destination-badges {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.badge:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.badge i {
+    font-size: 0.75rem;
+}
+
+/* Hata Mesajları */
+.text-danger {
+    color: #e53e3e;
+    font-size: 0.8rem;
+    margin-top: 6px;
+    display: block;
+    font-weight: 500;
+}
+
+/* Bildirimler */
+.notification {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.notification.success .notification-content {
+    border-left: 4px solid #48bb78;
+}
+
+.notification.error .notification-content {
+    border-left: 4px solid #e53e3e;
+}
+
+.notification i {
+    font-size: 1.25rem;
+    margin-right: 15px;
+}
+
+.notification.success i {
+    color: #48bb78;
+}
+
+.notification.error i {
+    color: #e53e3e;
+}
+
+.notification p {
+    flex: 1;
+    color: #2d3748;
+    font-size: 0.95rem;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: #a0aec0;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.notification-close:hover {
+    color: #2d3748;
+}
+
+/* Responsive Stiller */
+@media (max-width: 991px) {
+    .auth-content {
+        padding: 30px;
+    }
+    
+    .auth-image {
+        width: 45%;
+    }
+    
+    .auth-image-content h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .auth-container {
+        flex-direction: column;
+        max-width: 500px;
+    }
+    
+    .auth-content,
+    .auth-image {
+        width: 100%;
+    }
+    
+    .auth-content {
+        padding: 30px 25px;
+        order: 1;
+    }
+    
+    .auth-image {
+        height: 220px;
+        order: 0;
+    }
+    
+    .auth-image-content {
+        bottom: 60px;
+    }
+    
+    .auth-image-content h2 {
+        font-size: 1.6rem;
+    }
+    
+    .auth-header h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .auth-content {
+        padding: 25px 20px;
+    }
+    
+    .social-container {
+        gap: 10px;
+    }
+    
+    .auth-image {
+        height: 180px;
+    }
+    
+    .auth-image-content h2 {
+        font-size: 1.4rem;
+    }
+    
+    .auth-image-content p {
+        font-size: 0.9rem;
+    }
+    
+    .destination-badges {
+        display: none;
+    }
+    
+    .auth-header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .image-location-tag {
+        top: 15px;
+        left: 15px;
+        padding: 4px 12px;
+        font-size: 0.8rem;
+    }
+} 

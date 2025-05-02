@@ -1,0 +1,296 @@
+@model IEnumerable<YerelTurlar.Models.Review>
+@{
+    ViewData["Title"] = "Değerlendirmeler";
+    Layout = "_AdminLayout";
+}
+
+<!-- Değerlendirmeler Başlık ve Özet -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div>
+        <h1 class="h3 mb-0 text-gray-800">Değerlendirmeler</h1>
+        <p class="text-muted">Kullanıcılar tarafından yapılan tüm tur değerlendirmelerini bu sayfadan yönetebilirsiniz.</p>
+    </div>
+</div>
+
+<!-- Filtreler -->
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="dashboard-card">
+            <div class="dashboard-card-body">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label for="tourFilter" class="form-label">Tur</label>
+                        <select id="tourFilter" class="form-select">
+                            <option value="">Tüm Turlar</option>
+                            @foreach (var tour in ViewBag.Tours ?? new List<YerelTurlar.Models.Tour>())
+                            {
+                                <option value="@tour.Id">@tour.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ratingFilter" class="form-label">Puan</label>
+                        <select id="ratingFilter" class="form-select">
+                            <option value="">Tüm Puanlar</option>
+                            <option value="5">5 Yıldız</option>
+                            <option value="4">4 Yıldız</option>
+                            <option value="3">3 Yıldız</option>
+                            <option value="2">2 Yıldız</option>
+                            <option value="1">1 Yıldız</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="approvalFilter" class="form-label">Durum</label>
+                        <select id="approvalFilter" class="form-select">
+                            <option value="">Tümü</option>
+                            <option value="true">Onaylanmış</option>
+                            <option value="false">Onay Bekliyor</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="button" id="filterButton" class="btn btn-primary w-100">Filtrele</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Değerlendirmeler Tablosu -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="dashboard-card mb-4">
+            <div class="dashboard-card-header py-3">
+                <h6 class="m-0 font-weight-bold">Tüm Değerlendirmeler</h6>
+            </div>
+            <div class="dashboard-card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="reviewsTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Kullanıcı</th>
+                                <th>Tur</th>
+                                <th>Puan</th>
+                                <th>Yorum</th>
+                                <th>Durum</th>
+                                <th>Tarih</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var review in Model)
+                            {
+                                <tr>
+                                    <td>@review.Id</td>
+                                    <td>@(review.User?.FirstName ?? "") @(review.User?.LastName ?? "")</td>
+                                    <td>@(review.Tour?.Name ?? "")</td>
+                                    <td>
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= review.Rating)
+                                            {
+                                                <i class="fas fa-star text-warning"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="far fa-star text-warning"></i>
+                                            }
+                                        }
+                                    </td>
+                                    <td>@(review.Comment?.Length > 50 ? review.Comment.Substring(0, 50) + "..." : review.Comment)</td>
+                                    <td>
+                                        <span class="badge @(review.IsApproved ? "bg-success" : "bg-warning")">
+                                            @(review.IsApproved ? "Onaylandı" : "Onay Bekliyor")
+                                        </span>
+                                    </td>
+                                    <td>@review.CreatedAt.ToString("dd.MM.yyyy")</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-info view-review" 
+                                                    data-id="@review.Id" 
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#viewReviewModal">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            @if (!review.IsApproved)
+                                            {
+                                                <a href="@Url.Action("ApproveReview", "Admin", new { id = review.Id })" 
+                                                   class="btn btn-sm btn-success" 
+                                                   title="Onayla">
+                                                    <i class="fas fa-check"></i>
+                                                </a>
+                                            }
+                                            <button type="button" class="btn btn-sm btn-danger delete-review" 
+                                                    data-id="@review.Id" 
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#deleteReviewModal">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Değerlendirme Görüntüleme Modal -->
+<div class="modal fade" id="viewReviewModal" tabindex="-1" aria-labelledby="viewReviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewReviewModalLabel">Değerlendirme Detayı</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Kullanıcı:</strong> <span id="viewReviewUser"></span></p>
+                        <p><strong>Tur:</strong> <span id="viewReviewTour"></span></p>
+                        <p><strong>Puan:</strong> <span id="viewReviewRating"></span></p>
+                        <p><strong>Tarih:</strong> <span id="viewReviewDate"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Durum:</strong> <span id="viewReviewStatus"></span></p>
+                        <p><strong>Email:</strong> <span id="viewReviewEmail"></span></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p><strong>Yorum:</strong></p>
+                        <div class="p-3 bg-light rounded" id="viewReviewComment"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <a href="#" id="approveReviewButton" class="btn btn-success">Onayla</a>
+                <button type="button" class="btn btn-danger" id="deleteButton"
+                        data-bs-toggle="modal" 
+                        data-bs-target="#deleteReviewModal">
+                    Sil
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Değerlendirme Silme Modal -->
+<div class="modal fade" id="deleteReviewModal" tabindex="-1" aria-labelledby="deleteReviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteReviewModalLabel">Değerlendirmeyi Sil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bu değerlendirmeyi silmek istediğinizden emin misiniz?</p>
+                <p>Bu işlem geri alınamaz.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                <a href="#" id="confirmDeleteButton" class="btn btn-danger">Sil</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Veri tablosunu başlat
+            var table = $('#reviewsTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/tr.json'
+                },
+                order: [[0, 'desc']]
+            });
+            
+            // Değerlendirme görüntüleme
+            $('.view-review').on('click', function() {
+                var reviewId = $(this).data('id');
+                $.ajax({
+                    url: '@Url.Action("GetReview", "Admin")/' + reviewId,
+                    type: 'GET',
+                    success: function(data) {
+                        $('#viewReviewUser').text(data.user.firstName + ' ' + data.user.lastName);
+                        $('#viewReviewTour').text(data.tour.name);
+                        
+                        var ratingHtml = '';
+                        for (var i = 1; i <= 5; i++) {
+                            if (i <= data.rating) {
+                                ratingHtml += '<i class="fas fa-star text-warning"></i> ';
+                            } else {
+                                ratingHtml += '<i class="far fa-star text-warning"></i> ';
+                            }
+                        }
+                        
+                        $('#viewReviewRating').html(ratingHtml);
+                        $('#viewReviewDate').text(new Date(data.createdAt).toLocaleDateString('tr-TR'));
+                        $('#viewReviewStatus').html(data.isApproved 
+                            ? '<span class="badge bg-success">Onaylandı</span>' 
+                            : '<span class="badge bg-warning">Onay Bekliyor</span>');
+                        $('#viewReviewEmail').text(data.user.email);
+                        $('#viewReviewComment').text(data.comment);
+                        
+                        // Onay butonunu göster/gizle
+                        if (data.isApproved) {
+                            $('#approveReviewButton').hide();
+                        } else {
+                            $('#approveReviewButton').show();
+                            $('#approveReviewButton').attr('href', '@Url.Action("ApproveReview", "Admin")/' + data.id);
+                        }
+                        
+                        // Silme butonu için link güncelleme
+                        $('#deleteButton').data('id', data.id);
+                    }
+                });
+            });
+            
+            // Silme için ID'yi modal'a aktar
+            $('.delete-review').on('click', function() {
+                var reviewId = $(this).data('id');
+                $('#confirmDeleteButton').attr('href', '@Url.Action("DeleteReview", "Admin")/' + reviewId);
+            });
+            
+            // Görüntüleme modalından silme modalına geçiş
+            $('#deleteButton').on('click', function() {
+                var reviewId = $(this).data('id');
+                $('#viewReviewModal').modal('hide');
+                $('#confirmDeleteButton').attr('href', '@Url.Action("DeleteReview", "Admin")/' + reviewId);
+            });
+            
+            // Filtre butonuna tıklama
+            $('#filterButton').on('click', function() {
+                var tourId = $('#tourFilter').val();
+                var rating = $('#ratingFilter').val();
+                var isApproved = $('#approvalFilter').val();
+                
+                table.columns(2).search(tourId).draw();
+                table.columns(3).search(rating).draw();
+                table.columns(5).search(isApproved === 'true' ? 'Onaylandı' : 
+                                       (isApproved === 'false' ? 'Onay Bekliyor' : '')).draw();
+            });
+            
+            // Başarılı/Hata mesajlarını göster
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <text>
+                toastr.success('@TempData["SuccessMessage"]');
+                </text>
+            }
+            
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <text>
+                toastr.error('@TempData["ErrorMessage"]');
+                </text>
+            }
+        });
+    </script>
+} 

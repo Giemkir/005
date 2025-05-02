@@ -1,0 +1,502 @@
+﻿@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+@section Styles {
+    <!-- Ana sayfa için özel stiller buraya eklenebilir -->
+}
+
+<!-- Modern Hero Slider -->
+<section class="hero-slider-section">
+    <div class="hero-slider">
+        <div class="hero-slide active">
+            <img src="https://images.unsplash.com/photo-1527838832700-5059252407fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1498&q=80" alt="İstanbul Turu">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Masalsı manzaralar,<br>eşsiz deneyimler</h1>
+                    <p>İstanbul'un tarihi dokusunu ve modern yüzünü keşfedin</p>
+                    <a href="#" class="btn-primary">Daha fazla bilgi <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="hero-category-buttons">
+                    <a href="#" class="hero-category-button">
+                        <i class="fas fa-landmark"></i> Kültür
+                    </a>
+                    <a href="#" class="hero-category-button">
+                        <i class="fas fa-utensils"></i> Yemek
+                    </a>
+                    <a href="#" class="hero-category-button">
+                        <i class="fas fa-mountain"></i> Doğa
+                    </a>
+                    <a href="#" class="hero-category-button">
+                        <i class="fas fa-running"></i> Spor
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide">
+            <img src="https://images.unsplash.com/photo-1604750201786-0eeb77924f0f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Kapadokya Turu">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Masalsı manzaralar,<br>eşsiz deneyimler</h1>
+                    <p>Kapadokya'nın büyülü atmosferini yerel rehberlerle keşfedin</p>
+                    <a href="#" class="btn-primary">Daha fazla bilgi <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="hero-category-buttons">
+                    <a href="#" class="hero-category-button">
+                        <i class="fas fa-landmark"></i> Kültür
+                    </a>
+                    <a href="#" class="hero-category-button">
+                        <i class="fas fa-utensils"></i> Yemek
+                    </a>
+                    <a href="#" class="hero-category-button">
+                        <i class="fas fa-mountain"></i> Doğa
+                    </a>
+                    <a href="#" class="hero-category-button">
+                        <i class="fas fa-running"></i> Spor
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide">
+            <img src="https://images.unsplash.com/photo-1742849126508-0f7da31b899f?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Pamukkale Turu">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Masalsı manzaralar,<br>eşsiz deneyimler</h1>
+                    <p>Doğanın mucizesi travertenler ve antik Hierapolis kenti</p>
+                    <a href="#" class="btn-primary">Daha fazla bilgi <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="hero-category-buttons">
+                    <a href="#" class="hero-category-button">
+                        <i class="fas fa-landmark"></i> Kültür
+                    </a>
+                    <a href="#" class="hero-category-button">
+                        <i class="fas fa-utensils"></i> Yemek
+                    </a>
+                    <a href="#" class="hero-category-button">
+                        <i class="fas fa-mountain"></i> Doğa
+                    </a>
+                    <a href="#" class="hero-category-button">
+                        <i class="fas fa-running"></i> Spor
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slider Kontrolleri -->
+        <div class="slider-controls">
+            <button class="slider-arrow prev"><i class="fas fa-chevron-left"></i></button>
+            <div class="slider-dots">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+            </div>
+            <button class="slider-arrow next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
+
+<!-- Sadeleştirilmiş Arama Bölümü -->
+<section class="search-section">
+    <div class="container">
+        <div class="search-container-simple">
+            <form class="search-form-simple">
+                <div class="search-input-group">
+                    <label>Nereye gitmek istiyorsunuz?</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" placeholder="Şehir veya bölge seçin">
+                    </div>
+                </div>
+                <div class="search-input-group">
+                    <label>Kategori</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-th-large"></i>
+                        <select>
+                            <option value="">Tüm Kategoriler</option>
+                            <option value="culture">Kültür & Tarih</option>
+                            <option value="food">Yemek & Gastronomi</option>
+                            <option value="nature">Doğa & Macera</option>
+                            <option value="sports">Spor & Aktivite</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-input-group">
+                    <label>Tarih</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                    </div>
+                </div>
+                <button type="submit" class="search-btn-simple">
+                    <i class="fas fa-search"></i> Ara
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="categories">
+    <div class="container">
+        <div class="section-title-container categories-title-container">
+            <p class="section-subtitle categories-subtitle">KATEGORİLER</p>
+            <h2>İlgi Alanınıza Göre Keşfedin</h2>
+            <p>Tutkularınıza ve ilgi alanlarınıza göre size en uygun deneyimleri bulun</p>
+            <span class="title-separator"></span>
+        </div>
+        <div class="categories-grid">
+            <a href="#" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <h3>Kültür</h3>
+                <p>Tarihi ve kültürel miras turları</p>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>Yemek</h3>
+                <p>Yerel lezzetler ve gastronomi turları</p>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <h3>Doğa</h3>
+                <p>Doğa yürüyüşleri ve açık hava aktiviteleri</p>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-running"></i>
+                </div>
+                <h3>Spor</h3>
+                <p>Aktif ve macera dolu deneyimler</p>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <h3>Fotoğraf</h3>
+                <p>Fotoğraf turları ve workshoplar</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Popüler Turlar Bölümü - Yeni Tasarım -->
+<section class="tours-section">
+    <div class="container">
+        <div class="section-title-container tours-title-container">
+            <p class="section-subtitle tours-subtitle">EN İYİLER</p>
+            <h2>Türkiye'nin En Popüler Turları</h2>
+            <p>Yerel rehberlerimizin eşliğinde Türkiye'nin en çok tercih edilen ve beğenilen turlarını keşfedin.</p>
+            <span class="title-separator"></span>
+        </div>
+        
+        <div class="tours-grid">
+            <!-- Boğaz'da Gün Batımı Yat Turu -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1710106830396-1e36bd0bca8d?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Boğaz'da Gün Batımı Yat Turu">
+                    <div class="tour-badge"><i class="fas fa-fire"></i> Popüler</div>
+                    <div class="tour-price">₺450 / kişi</div>
+                </div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Boğaz'da Gün Batımı Yat Turu</h3>
+                    <p class="tour-description">İstanbul Boğazı'nın eşsiz manzarasını gün batımında keşfedin. Yerel lezzetler eşliğinde, tarihi yarımadanın panoramik görüntüsünü yakalayın.</p>
+                    <div class="tour-meta">
+                        <div class="tour-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span> (128 değerlendirme)
+                        </div>
+                        <div class="tour-duration">
+                            <i class="fas fa-clock"></i> 3 saat
+                        </div>
+                    </div>
+                    <div class="tour-guide">
+                        <div class="guide-info">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmet Yılmaz">
+                            <span class="guide-name">Ahmet Yılmaz</span>
+                        </div>
+                        <span class="guide-type">Top Rehber</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kapadokya Balon Turu -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1647768283986-8442b7bc5c43?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Kapadokya Balon Turu">
+                    <div class="tour-badge"><i class="fas fa-award"></i> En Çok Satan</div>
+                    <div class="tour-price">₺2500 / kişi</div>
+                </div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Kapadokya Balon Turu</h3>
+                    <p class="tour-description">Güneşin ilk ışıklarıyla Kapadokya'nın peri bacalarını gökyüzünden izleyin. Unutulmaz bir deneyim ve nefes kesici manzaralar sizi bekliyor.</p>
+                    <div class="tour-meta">
+                        <div class="tour-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span> (215 değerlendirme)
+                        </div>
+                        <div class="tour-duration">
+                            <i class="fas fa-clock"></i> 1.5 saat
+                        </div>
+                    </div>
+                    <div class="tour-guide">
+                        <div class="guide-info">
+                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Mehmet Kaya">
+                            <span class="guide-name">Mehmet Kaya</span>
+                        </div>
+                        <span class="guide-type">Sertifikalı</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Antalya Kekova Tekne Turu -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1564671546498-09a366692274?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Antalya Kekova Tekne Turu">
+                    <div class="tour-badge"><i class="fas fa-percentage"></i> İndirimli</div>
+                    <div class="tour-price">₺350 / kişi</div>
+                </div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Antalya Kekova Tekne Turu</h3>
+                    <p class="tour-description">Turkuaz suları, antik batık şehri ve doğal güzellikleriyle Kekova'yı keşfedin. Yüzme molaları ve taze deniz mahsulleri öğle yemeği dahildir.</p>
+                    <div class="tour-meta">
+                        <div class="tour-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span> (156 değerlendirme)
+                        </div>
+                        <div class="tour-duration">
+                            <i class="fas fa-clock"></i> 8 saat
+                        </div>
+                    </div>
+                    <div class="tour-guide">
+                        <div class="guide-info">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ayşe Demir">
+                            <span class="guide-name">Ayşe Demir</span>
+                        </div>
+                        <span class="guide-type">Top Rehber</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Efes Antik Kenti Turu -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1619889066845-8ccb1b7ff3b4?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Efes Antik Kenti Turu">
+                    <div class="tour-badge"><i class="fas fa-history"></i> Tarih</div>
+                    <div class="tour-price">₺300 / kişi</div>
+                </div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Efes Antik Kenti Turu</h3>
+                    <p class="tour-description">Profesyonel bir arkeolog eşliğinde Efes Antik Kenti'ni keşfedin ve az bilinen hikayeleri dinleyin. Tarihin derinliklerine yolculuğa çıkın.</p>
+                    <div class="tour-meta">
+                        <div class="tour-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span> (210 değerlendirme)
+                        </div>
+                        <div class="tour-duration">
+                            <i class="fas fa-clock"></i> 3 saat
+                        </div>
+                    </div>
+                    <div class="tour-guide">
+                        <div class="guide-info">
+                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Mehmet Aydın">
+                            <span class="guide-name">Mehmet Aydın</span>
+                        </div>
+                        <span class="guide-type">Arkeolog</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pamukkale Travertenleri Turu -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1695589593603-129adfecac13?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Pamukkale Travertenleri Turu">
+                    <div class="tour-badge"><i class="fas fa-camera"></i> Fotoğraf</div>
+                    <div class="tour-price">₺400 / kişi</div>
+                </div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Pamukkale Travertenleri Turu</h3>
+                    <p class="tour-description">Doğanın mucizesi beyaz travertenleri ve antik Hierapolis kentini keşfedin. Şifalı sularda yüzme imkanı ve muhteşem manzaralar.</p>
+                    <div class="tour-meta">
+                        <div class="tour-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.7</span> (185 değerlendirme)
+                        </div>
+                        <div class="tour-duration">
+                            <i class="fas fa-clock"></i> 6 saat
+                        </div>
+                    </div>
+                    <div class="tour-guide">
+                        <div class="guide-info">
+                            <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Zeynep Kaya">
+                            <span class="guide-name">Zeynep Kaya</span>
+                        </div>
+                        <span class="guide-type">Sertifikalı</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kaş Dalış Turu -->
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1682687982501-1e58ab814714?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Kaş Dalış Turu">
+                    <div class="tour-badge"><i class="fas fa-water"></i> Macera</div>
+                    <div class="tour-price">₺550 / kişi</div>
+                </div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Kaş Dalış Turu</h3>
+                    <p class="tour-description">Akdeniz'in berrak sularında dalış deneyimi yaşayın. Batıklar, mağaralar ve renkli deniz yaşamını keşfedin. Tüm ekipman dahildir.</p>
+                    <div class="tour-meta">
+                        <div class="tour-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span> (142 değerlendirme)
+                        </div>
+                        <div class="tour-duration">
+                            <i class="fas fa-clock"></i> 5 saat
+                        </div>
+                    </div>
+                    <div class="tour-guide">
+                        <div class="guide-info">
+                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Ali Yılmaz">
+                            <span class="guide-name">Ali Yılmaz</span>
+                        </div>
+                        <span class="guide-type">PADI Eğitmeni</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Misafir Yorumları Bölümü - Yeni Tasarım -->
+<section class="reviews-section">
+    <div class="container">
+        <div class="section-title-container reviews-title-container">
+            <p class="section-subtitle reviews-subtitle">DENEYİMLER</p>
+            <h2>Misafirlerimizin Yorumları</h2>
+            <p>Yerel rehberlerimizle tur deneyimi yaşayan misafirlerimizin gerçek yorumları.</p>
+            <span class="title-separator"></span>
+        </div>
+        
+        <div class="reviews-grid">
+            <!-- Yorum 1 -->
+            <div class="review-card">
+                <div class="review-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="review-content">
+                    <p>"Yerel rehberimiz sayesinde İstanbul'un gizli kalmış köşelerini keşfettik. Turistik olmayan rotalar ve yerel lezzetler harikaydi!"</p>
+                </div>
+                <div class="review-author">
+                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Ayşe Y.">
+                    <div class="review-author-info">
+                        <h4>Ayşe Y.</h4>
+                        <p class="review-location">İstanbul, Türkiye</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Yorum 2 -->
+            <div class="review-card">
+                <div class="review-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="review-content">
+                    <p>"Kapadokya'daki yerel rehberimiz olağanüstüydü. Bize bölgenin tarihini ve kültürünü çok iyi anlattı. Kesinlikle tekrar tercih edeceğim!"</p>
+                </div>
+                <div class="review-author">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="John D.">
+                    <div class="review-author-info">
+                        <h4>John D.</h4>
+                        <p class="review-location">Londra, İngiltere</p>
+                    </div>
+                </div>
+</div>
+            
+            <!-- Yorum 3 -->
+            <div class="review-card">
+                <div class="review-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="review-content">
+                    <p>"Antalya'daki tekne turumuz muhteşemdi! Rehberimiz Ayşe çok bilgili ve eğlenceliydi. Kekova'daki batık şehir görülmeye değer. Kesinlikle tavsiye ederim."</p>
+                </div>
+                <div class="review-author">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Maria S.">
+                    <div class="review-author-info">
+                        <h4>Maria S.</h4>
+                        <p class="review-location">Barcelona, İspanya</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="how-it-works">
+    <div class="container">
+        <div class="section-title-container howto-title-container">
+            <p class="section-subtitle howto-subtitle">REHBER</p>
+            <h2>Üç Adımda Yerel Deneyimler</h2>
+            <p>Yerel rehberlerimizle benzersiz deneyimler yaşamak için izlemeniz gereken basit adımlar</p>
+            <span class="title-separator"></span>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Keşfet</h3>
+                <p>İlgi alanınıza ve gideceğiniz şehre göre benzersiz deneyimler keşfedin.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h3>Rezervasyon Yap</h3>
+                <p>Size uygun tarihi seçin ve hızlıca online rezervasyonunuzu tamamlayın.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-icon">
+                    <i class="fas fa-smile"></i>
+                </div>
+                <h3>Deneyimle</h3>
+                <p>Yerel rehberinizle buluşun ve unutulmaz bir deneyim yaşayın.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("_Newsletter")
+
+<!-- Yerel Rehber Olun Bölümü - Yeni Tasarım -->
+<section class="become-guide-new">
+    <div class="container">
+        <h2>Yerel bir rehber olun</h2>
+        <p>Kendi şehrinizi tanıtın, yeni insanlarla tanışın ve ek gelir elde edin.</p>
+        <a href="#" class="guide-signup-btn">Rehber Olarak Kaydolun</a>
+    </div>
+</section>
+
+

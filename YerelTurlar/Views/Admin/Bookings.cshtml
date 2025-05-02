@@ -1,0 +1,408 @@
+@model IEnumerable<YerelTurlar.Models.Booking>
+@{
+    ViewData["Title"] = "Rezervasyonlar";
+    Layout = "_AdminLayout";
+}
+
+<!-- Rezervasyonlar Başlık ve Özet -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div>
+        <h1 class="h3 mb-0 text-gray-800">Rezervasyonlar</h1>
+        <p class="text-muted">Tüm tur rezervasyonlarını bu sayfadan yönetebilirsiniz.</p>
+    </div>
+</div>
+
+<!-- Filtreler -->
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="dashboard-card">
+            <div class="dashboard-card-body">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label for="tourFilter" class="form-label">Tur</label>
+                        <select id="tourFilter" class="form-select">
+                            <option value="">Tüm Turlar</option>
+                            @foreach (var tour in ViewBag.Tours ?? new List<YerelTurlar.Models.Tour>())
+                            {
+                                <option value="@tour.Id">@tour.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="statusFilter" class="form-label">Durum</label>
+                        <select id="statusFilter" class="form-select">
+                            <option value="">Tümü</option>
+                            <option value="Pending">Onay Bekliyor</option>
+                            <option value="Confirmed">Onaylandı</option>
+                            <option value="Cancelled">İptal Edildi</option>
+                            <option value="Completed">Tamamlandı</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="paymentFilter" class="form-label">Ödeme Durumu</label>
+                        <select id="paymentFilter" class="form-select">
+                            <option value="">Tümü</option>
+                            <option value="true">Ödenmiş</option>
+                            <option value="false">Ödenmemiş</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="button" id="filterButton" class="btn btn-primary w-100">Filtrele</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Rezervasyonlar Tablosu -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="dashboard-card mb-4">
+            <div class="dashboard-card-header py-3">
+                <h6 class="m-0 font-weight-bold">Tüm Rezervasyonlar</h6>
+            </div>
+            <div class="dashboard-card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="bookingsTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tur</th>
+                                <th>Müşteri</th>
+                                <th>Tarih</th>
+                                <th>Kişi</th>
+                                <th>Toplam</th>
+                                <th>Ödeme</th>
+                                <th>Durum</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var booking in Model)
+                            {
+                                <tr>
+                                    <td>@booking.Id</td>
+                                    <td>@(booking.Tour?.Name ?? "")</td>
+                                    <td>@(booking.User?.FirstName ?? "") @(booking.User?.LastName ?? "")</td>
+                                    <td>@booking.BookingDate.ToString("dd.MM.yyyy")</td>
+                                    <td>@booking.ParticipantCount</td>
+                                    <td>@booking.TotalAmount.ToString("N2") ₺</td>
+                                    <td>
+                                        <span class="badge @(booking.IsPaid ? "bg-success" : "bg-danger")">
+                                            @(booking.IsPaid ? "Ödendi" : "Ödenmedi")
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @{
+                                            var statusClass = booking.Status switch
+                                            {
+                                                "Pending" => "bg-warning",
+                                                "Confirmed" => "bg-info",
+                                                "Cancelled" => "bg-danger",
+                                                "Completed" => "bg-success",
+                                                _ => "bg-secondary"
+                                            };
+                                            
+                                            var statusText = booking.Status switch
+                                            {
+                                                "Pending" => "Bekliyor",
+                                                "Confirmed" => "Onaylandı",
+                                                "Cancelled" => "İptal",
+                                                "Completed" => "Tamamlandı",
+                                                _ => booking.Status
+                                            };
+                                        }
+                                        <span class="badge @statusClass">@statusText</span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-info view-booking" 
+                                                    data-id="@booking.Id" 
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#viewBookingModal">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-primary edit-status" 
+                                                    data-id="@booking.Id" 
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#editStatusModal">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-danger delete-booking" 
+                                                    data-id="@booking.Id" 
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#deleteBookingModal">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Rezervasyon Görüntüleme Modal -->
+<div class="modal fade" id="viewBookingModal" tabindex="-1" aria-labelledby="viewBookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewBookingModalLabel">Rezervasyon Detayı</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h6 class="fw-bold">Rezervasyon Bilgileri</h6>
+                        <p><strong>Rezervasyon ID:</strong> <span id="viewBookingId"></span></p>
+                        <p><strong>Tarih:</strong> <span id="viewBookingDate"></span></p>
+                        <p><strong>Katılımcı Sayısı:</strong> <span id="viewParticipantCount"></span></p>
+                        <p><strong>Durum:</strong> <span id="viewStatus"></span></p>
+                        <p><strong>Oluşturulma:</strong> <span id="viewCreatedAt"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-bold">Ödeme Bilgileri</h6>
+                        <p><strong>Toplam Tutar:</strong> <span id="viewTotalAmount"></span></p>
+                        <p><strong>Ödeme Durumu:</strong> <span id="viewPaymentStatus"></span></p>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h6 class="fw-bold">Tur Bilgileri</h6>
+                        <p><strong>Tur Adı:</strong> <span id="viewTourName"></span></p>
+                        <p><strong>Konum:</strong> <span id="viewTourLocation"></span></p>
+                        <p><strong>Süre:</strong> <span id="viewTourDuration"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-bold">Müşteri Bilgileri</h6>
+                        <p><strong>Ad Soyad:</strong> <span id="viewCustomerName"></span></p>
+                        <p><strong>Email:</strong> <span id="viewCustomerEmail"></span></p>
+                        <p><strong>Telefon:</strong> <span id="viewCustomerPhone"></span></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h6 class="fw-bold">Notlar</h6>
+                        <div class="p-3 bg-light rounded" id="viewNotes"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary" id="editStatusBtn" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#editStatusModal">
+                    Durumu Güncelle
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Durum Güncelleme Modal -->
+<div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editStatusModalLabel">Rezervasyon Durumunu Güncelle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <form id="updateStatusForm" asp-controller="Admin" asp-action="UpdateBookingStatus" method="post">
+                <div class="modal-body">
+                    <input type="hidden" id="bookingId" name="id">
+                    
+                    <div class="mb-3">
+                        <label for="bookingStatus" class="form-label">Rezervasyon Durumu</label>
+                        <select class="form-select" id="bookingStatus" name="status" required>
+                            <option value="Pending">Onay Bekliyor</option>
+                            <option value="Confirmed">Onaylandı</option>
+                            <option value="Cancelled">İptal Edildi</option>
+                            <option value="Completed">Tamamlandı</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="isPaid" class="form-label">Ödeme Durumu</label>
+                        <select class="form-select" id="isPaid" name="isPaid">
+                            <option value="false">Ödenmedi</option>
+                            <option value="true">Ödendi</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Notlar</label>
+                        <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Rezervasyon Silme Modal -->
+<div class="modal fade" id="deleteBookingModal" tabindex="-1" aria-labelledby="deleteBookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteBookingModalLabel">Rezervasyonu Sil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bu rezervasyonu silmek istediğinizden emin misiniz?</p>
+                <p>Bu işlem geri alınamaz.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                <a href="#" id="confirmDeleteButton" class="btn btn-danger">Sil</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Veri tablosunu başlat
+            var table = $('#bookingsTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/tr.json'
+                },
+                order: [[0, 'desc']]
+            });
+            
+            // Rezervasyon görüntüleme
+            $('.view-booking').on('click', function() {
+                var bookingId = $(this).data('id');
+                $.ajax({
+                    url: '@Url.Action("GetBooking", "Admin")/' + bookingId,
+                    type: 'GET',
+                    success: function(data) {
+                        $('#viewBookingId').text(data.id);
+                        $('#viewBookingDate').text(new Date(data.bookingDate).toLocaleDateString('tr-TR'));
+                        $('#viewParticipantCount').text(data.participantCount);
+                        
+                        var statusText = "";
+                        var statusClass = "";
+                        
+                        switch(data.status) {
+                            case "Pending":
+                                statusText = "Onay Bekliyor";
+                                statusClass = "bg-warning";
+                                break;
+                            case "Confirmed":
+                                statusText = "Onaylandı";
+                                statusClass = "bg-info";
+                                break;
+                            case "Cancelled":
+                                statusText = "İptal Edildi";
+                                statusClass = "bg-danger";
+                                break;
+                            case "Completed":
+                                statusText = "Tamamlandı";
+                                statusClass = "bg-success";
+                                break;
+                            default:
+                                statusText = data.status;
+                                statusClass = "bg-secondary";
+                        }
+                        
+                        $('#viewStatus').html('<span class="badge ' + statusClass + '">' + statusText + '</span>');
+                        $('#viewCreatedAt').text(new Date(data.createdAt).toLocaleDateString('tr-TR'));
+                        
+                        $('#viewTotalAmount').text(parseFloat(data.totalAmount).toLocaleString('tr-TR', { minimumFractionDigits: 2 }) + ' ₺');
+                        $('#viewPaymentStatus').html(data.isPaid 
+                            ? '<span class="badge bg-success">Ödendi</span>' 
+                            : '<span class="badge bg-danger">Ödenmedi</span>');
+                        
+                        $('#viewTourName').text(data.tour.name);
+                        $('#viewTourLocation').text(data.tour.location);
+                        $('#viewTourDuration').text(data.tour.duration);
+                        
+                        $('#viewCustomerName').text(data.user.firstName + ' ' + data.user.lastName);
+                        $('#viewCustomerEmail').text(data.user.email);
+                        $('#viewCustomerPhone').text(data.user.phone);
+                        
+                        $('#viewNotes').text(data.notes || 'Not bulunmamaktadır.');
+                        
+                        // Durum güncelleme butonu için ID ata
+                        $('#editStatusBtn').data('id', data.id);
+                    }
+                });
+            });
+            
+            // Durum güncelleme modalını açarken verileri doldur
+            $('.edit-status, #editStatusBtn').on('click', function() {
+                var bookingId = $(this).data('id');
+                $('#bookingId').val(bookingId);
+                
+                // Varsa mevcut durumu seç
+                $.ajax({
+                    url: '@Url.Action("GetBooking", "Admin")/' + bookingId,
+                    type: 'GET',
+                    success: function(data) {
+                        $('#bookingStatus').val(data.status);
+                        $('#isPaid').val(data.isPaid.toString());
+                        $('#notes').val(data.notes);
+                    }
+                });
+            });
+            
+            // Silme için ID'yi modal'a aktar
+            $('.delete-booking').on('click', function() {
+                var bookingId = $(this).data('id');
+                $('#confirmDeleteButton').attr('href', '@Url.Action("DeleteBooking", "Admin")/' + bookingId);
+            });
+            
+            // Filtre butonuna tıklama
+            $('#filterButton').on('click', function() {
+                var tourId = $('#tourFilter').val();
+                var status = $('#statusFilter').val();
+                var isPaid = $('#paymentFilter').val();
+                
+                if (tourId) {
+                    table.columns(1).search($('#tourFilter option:selected').text()).draw();
+                } else {
+                    table.columns(1).search('').draw();
+                }
+                
+                var statusText = "";
+                switch(status) {
+                    case "Pending": statusText = "Bekliyor"; break;
+                    case "Confirmed": statusText = "Onaylandı"; break;
+                    case "Cancelled": statusText = "İptal"; break;
+                    case "Completed": statusText = "Tamamlandı"; break;
+                    default: statusText = "";
+                }
+                
+                table.columns(7).search(statusText).draw();
+                
+                table.columns(6).search(isPaid === 'true' ? 'Ödendi' : 
+                                      (isPaid === 'false' ? 'Ödenmedi' : '')).draw();
+            });
+            
+            // Başarılı/Hata mesajlarını göster
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <text>
+                toastr.success('@TempData["SuccessMessage"]');
+                </text>
+            }
+            
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <text>
+                toastr.error('@TempData["ErrorMessage"]');
+                </text>
+            }
+        });
+    </script>
+} 

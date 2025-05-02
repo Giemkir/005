@@ -1,0 +1,293 @@
+@{
+    ViewData["Title"] = "Kategori Detayları";
+    var categoryId = ViewBag.CategoryId;
+    var categoryName = "";
+    var categoryIcon = "";
+    var categoryDescription = "";
+    var categoryImage = "";
+    
+    switch (categoryId) {
+        case "kultur":
+            categoryName = "Kültür Turları";
+            categoryIcon = "fas fa-landmark";
+            categoryDescription = "Tarihi yerler, müzeler ve kültürel miras alanlarını keşfedin.";
+            categoryImage = "https://images.unsplash.com/photo-1596422846543-75c6fc197f11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80";
+            break;
+        case "yemek":
+            categoryName = "Yemek Turları";
+            categoryIcon = "fas fa-utensils";
+            categoryDescription = "Yerel lezzetleri, yemek kültürünü ve gastronomi deneyimlerini keşfedin.";
+            categoryImage = "https://images.unsplash.com/photo-1555126634-323283e090fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80";
+            break;
+        case "doga":
+            categoryName = "Doğa Turları";
+            categoryIcon = "fas fa-mountain";
+            categoryDescription = "Doğal güzellikler, milli parklar ve açık hava aktivitelerini keşfedin.";
+            categoryImage = "https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1173&q=80";
+            break;
+        case "spor":
+            categoryName = "Spor Aktiviteleri";
+            categoryIcon = "fas fa-running";
+            categoryDescription = "Macera dolu spor aktiviteleri ve adrenalin dolu deneyimleri keşfedin.";
+            categoryImage = "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80";
+            break;
+        case "fotograf":
+            categoryName = "Fotoğraf Turları";
+            categoryIcon = "fas fa-camera";
+            categoryDescription = "Fotoğraf çekimi için en iyi manzaraları ve özel anları keşfedin.";
+            categoryImage = "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80";
+            break;
+        case "sanat":
+            categoryName = "Sanat Turları";
+            categoryIcon = "fas fa-palette";
+            categoryDescription = "Sanat galerileri, atölyeler ve sanatsal etkinlikleri keşfedin.";
+            categoryImage = "https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80";
+            break;
+        default:
+            categoryName = "Kategori Bulunamadı";
+            categoryIcon = "fas fa-question";
+            categoryDescription = "Bu kategori mevcut değil.";
+            categoryImage = "https://images.unsplash.com/photo-1519677100203-a0e668c92439?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
+            break;
+    }
+    
+    // Tur resimleri
+    string[] tourImages = {
+        "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80",
+        "https://images.unsplash.com/photo-1594818379496-da1e345b0ded?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+        "https://images.unsplash.com/photo-1589561454226-796a8aa89b05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80",
+        "https://images.unsplash.com/photo-1527838832700-5059252407fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=698&q=80",
+        "https://images.unsplash.com/photo-1610971309274-19c33f544302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+        "https://images.unsplash.com/photo-1570900808791-d530855f79e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    };
+    
+    // Rehber resimleri
+    string[] guideImages = {
+        "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80",
+        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+    };
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/categories.css" />
+    <style>
+        
+        .tour-card .tour-image {
+            position: relative;
+            height: 220px;
+            background-color: #f0f0f0;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        
+        .guide-card .guide-image {
+            position: relative;
+            height: 250px;
+            background-color: #f0f0f0;
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+}
+
+<!-- Hero Bölümü -->
+<section class="category-detail-hero" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url('@categoryImage');">
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="category-icon-large">
+                <i class="@categoryIcon"></i>
+            </div>
+            <h1>@categoryName</h1>
+            <p>@categoryDescription</p>
+        </div>
+    </div>
+</section>
+
+<!-- Filtre Bölümü -->
+<section class="tour-filter">
+    <div class="container">
+        <div class="filter-container">
+            <div class="search-box">
+                <input type="text" placeholder="Tur ara...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="filter-options">
+                <select class="filter-select">
+                    <option value="">Fiyat Aralığı</option>
+                    <option value="0-500">₺0 - ₺500</option>
+                    <option value="500-1000">₺500 - ₺1000</option>
+                    <option value="1000+">₺1000+</option>
+                </select>
+                <select class="filter-select">
+                    <option value="">Süre</option>
+                    <option value="0-3">0-3 Saat</option>
+                    <option value="3-6">3-6 Saat</option>
+                    <option value="6+">6+ Saat</option>
+                </select>
+                <select class="filter-select">
+                    <option value="">Sıralama</option>
+                    <option value="popular">En Popüler</option>
+                    <option value="price-low">Fiyat (Düşükten Yükseğe)</option>
+                    <option value="price-high">Fiyat (Yüksekten Düşüğe)</option>
+                    <option value="rating">Puan</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Turlar Bölümü -->
+<section class="category-tours">
+    <div class="container">
+        <div class="tours-title-container">
+            <h2 class="section-title">@categoryName</h2>
+            <p class="section-subtitle">Yerel rehberlerimizle benzersiz deneyimler yaşayın</p>
+        </div>
+        
+        <div class="tours-grid">
+            @for (int i = 0; i < 6; i++)
+            {
+                <div class="tour-card">
+                    <div class="tour-image" style="background-image: url('@tourImages[i]');">
+                        <div class="tour-overlay"></div>
+                        <div class="tour-badges">
+                            <span class="tour-badge featured"><i class="fas fa-award"></i> Öne Çıkan</span>
+                            <span class="tour-badge discount">%15 İndirim</span>
+                        </div>
+                        <div class="tour-price">
+                            <span class="price">₺@(Random.Shared.Next(300, 1500))</span>
+                            <span class="per-person">/ kişi</span>
+                        </div>
+                    </div>
+                    <div class="tour-content">
+                        <div class="tour-rating">
+                            @{
+                                var rating = 4 + Random.Shared.NextDouble();
+                                var reviewCount = Random.Shared.Next(10, 200);
+                            }
+                            <span class="stars">
+                                @for (int j = 1; j <= 5; j++)
+                                {
+                                    if (j <= Math.Floor(rating))
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                    else if (j - rating < 1 && j - rating > 0)
+                                    {
+                                        <i class="fas fa-star-half-alt"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="far fa-star"></i>
+                                    }
+                                }
+                            </span>
+                            <span class="review-count">@rating.ToString("0.0") (@reviewCount)</span>
+                        </div>
+                        <h3>@categoryName Deneyimi @(i+1)</h3>
+                        <div class="tour-info">
+                            <span><i class="fas fa-clock"></i> @(Random.Shared.Next(2, 8)) Saat</span>
+                            <span><i class="fas fa-user-friends"></i> Max @(Random.Shared.Next(4, 16)) Kişi</span>
+                            <span><i class="fas fa-map-marker-alt"></i> @(new[] {"İstanbul", "Antalya", "İzmir", "Kapadokya", "Muğla", "Bursa"}[Random.Shared.Next(0, 6)])</span>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc vel tincidunt lacinia, nisl nisl aliquam nisl.</p>
+                        <div class="tour-guide">
+                            <img src="@guideImages[Random.Shared.Next(0, guideImages.Length)]" alt="Rehber">
+                            <div class="guide-info">
+                                <span class="guide-name">@(new[] {"Ahmet Yılmaz", "Ayşe Demir", "Mehmet Kaya", "Zeynep Şahin", "Can Öztürk"}[Random.Shared.Next(0, 5)])</span>
+                                <span class="guide-title">Yerel Rehber</span>
+                            </div>
+                        </div>
+                        <a href="#" class="tour-button">Detayları Gör</a>
+                    </div>
+                </div>
+            }
+        </div>
+        
+        <div class="pagination">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <span>...</span>
+            <a href="#">5</a>
+            <a href="#" class="next"><i class="fas fa-chevron-right"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- Popüler Rehberler Bölümü -->
+<section class="category-guides">
+    <div class="container">
+        <div class="guides-title-container">
+            <h2 class="section-title">@categoryName Rehberlerimiz</h2>
+            <p class="section-subtitle">Bu kategoride uzmanlaşmış yerel rehberlerimiz</p>
+        </div>
+        
+        <div class="guides-grid">
+            @for (int i = 0; i < 3; i++)
+            {
+                <div class="guide-card">
+                    <div class="guide-image" style="background-image: url('@guideImages[i]');">
+                    </div>
+                    <div class="guide-content">
+                        <h3>@(new[] {"Ahmet Yılmaz", "Ayşe Demir", "Mehmet Kaya", "Zeynep Şahin", "Can Öztürk"}[Random.Shared.Next(0, 5)])</h3>
+                        <div class="guide-info">
+                            <span><i class="fas fa-map-marker-alt"></i> @(new[] {"İstanbul", "Antalya", "İzmir", "Kapadokya", "Muğla", "Bursa"}[Random.Shared.Next(0, 6)])</span>
+                            <span><i class="fas fa-language"></i> @(new[] {"Türkçe, İngilizce", "Türkçe, Almanca", "Türkçe, İngilizce, Fransızca", "Türkçe, Rusça", "Türkçe, İngilizce, İspanyolca"}[Random.Shared.Next(0, 5)])</span>
+                        </div>
+                        <div class="guide-rating">
+                            @{
+                                var guideRating = 4 + Random.Shared.NextDouble();
+                                var guideReviewCount = Random.Shared.Next(10, 100);
+                            }
+                            <span class="stars">
+                                @for (int j = 1; j <= 5; j++)
+                                {
+                                    if (j <= Math.Floor(guideRating))
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                    else if (j - guideRating < 1 && j - guideRating > 0)
+                                    {
+                                        <i class="fas fa-star-half-alt"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="far fa-star"></i>
+                                    }
+                                }
+                            </span>
+                            <span class="review-count">@guideRating.ToString("0.0") (@guideReviewCount değerlendirme)</span>
+                        </div>
+                        <p>@categoryName konusunda @(Random.Shared.Next(2, 10)) yıllık deneyime sahip uzman rehber.</p>
+                        <a href="#" class="guide-button">Profili Gör</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Arama fonksiyonu
+            $('.search-box input').on('keyup', function() {
+                var value = $(this).val().toLowerCase();
+                $('.tour-card').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+            
+            // Bildirim kapatma
+            $('.notification-close').on('click', function() {
+                $(this).closest('.notification').fadeOut();
+            });
+        });
+    </script>
+} 

@@ -1,0 +1,119 @@
+@model YerelTurlar.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Kayıt Ol";
+    Layout = "_AuthLayout";
+}
+
+<section class="auth-section">
+    <div class="container">
+        <div class="auth-container">
+            <div class="auth-content">
+                <div class="auth-header">
+                    <h1>Kayıt Ol</h1>
+                    <p>Yeni bir hesap oluşturarak özel turları keşfedin ve rezervasyon yapın.</p>
+                </div>
+                
+                <form class="auth-form" asp-controller="Account" asp-action="Register" method="post">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label asp-for="FirstName">Ad</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-user"></i>
+                                <input asp-for="FirstName" type="text" placeholder="Adınız" required>
+                            </div>
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label asp-for="LastName">Soyad</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-user"></i>
+                                <input asp-for="LastName" type="text" placeholder="Soyadınız" required>
+                            </div>
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Email">E-posta Adresi</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input asp-for="Email" type="email" placeholder="E-posta adresinizi girin" required>
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Phone">Telefon Numarası</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-phone"></i>
+                            <input asp-for="Phone" type="tel" placeholder="Telefon numaranızı girin">
+                        </div>
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Password">Şifre</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input asp-for="Password" type="password" placeholder="Şifrenizi girin" required>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-meter">
+                                <div class="strength-meter-fill" data-strength="0"></div>
+                            </div>
+                            <small>Şifreniz en az 8 karakter, büyük/küçük harf ve rakam içermelidir.</small>
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword">Şifre Tekrar</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input asp-for="ConfirmPassword" type="password" placeholder="Şifrenizi tekrar girin" required>
+                        </div>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-options">
+                        <div class="remember-me">
+                            <input asp-for="AcceptTerms" type="checkbox" id="terms" required>
+                            <label asp-for="AcceptTerms"><a href="/gizlilik-politikasi" target="_blank">Gizlilik Politikası</a> ve <a href="/kullanim-kosullari" target="_blank">Kullanım Koşulları</a>'nı kabul ediyorum.</label>
+                        </div>
+                        <span asp-validation-for="AcceptTerms" class="text-danger"></span>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn">
+                        Kayıt Ol <i class="fas fa-arrow-right"></i>
+                    </button>
+                    
+                    <div class="social-login">
+                        <p>Veya şununla kayıt olun:</p>
+                        <div class="social-buttons">
+                            <a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="Google" class="social-btn google">
+                                <i class="fab fa-google"></i> Google
+                            </a>
+                            <a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="Facebook" class="social-btn facebook">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </a>
+                        </div>
+                    </div>
+                </form>
+                
+                <div class="auth-footer">
+                    <p>Zaten hesabınız var mı? <a asp-controller="Account" asp-action="Login">Giriş Yap</a></p>
+                </div>
+            </div>
+            
+            <div class="auth-image">
+                <img src="https://images.unsplash.com/photo-1611945391784-f3454d560815?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Kapadokya">
+                <div class="auth-image-overlay"></div>
+                <div class="auth-image-content">
+                    <h2>Yerel Rehberlerle Türkiye'nin Gizli Kalmış Yerlerini Keşfedin</h2>
+                    <p>Benzersiz deneyimler ve unutulmaz anılar için hemen kayıt olun.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 

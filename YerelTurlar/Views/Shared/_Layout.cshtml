@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - YerelTurlar</title>
+    <link rel="stylesheet" href="~/css/styles.css?v=@DateTime.Now.Ticks" />
+    @await RenderSectionAsync("Styles", required: false)
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="/"><img src="~/images/logo.svg" alt="Yerel Turlar"></a>
+                </div>
+                <nav class="desktop-nav">
+                    <ul class="main-menu">
+                        <li><a asp-controller="Home" asp-action="Index" class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">Ana Sayfa</a></li>
+                        <li><a href="/Categories" class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Categories" ? "active" : "")">Kategoriler</a></li>
+                        <li><a asp-controller="Home" asp-action="Destinations" class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "Destinations" ? "active" : "")">Turlar</a></li>
+                        <li><a asp-controller="Home" asp-action="Guides" class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "Guides" ? "active" : "")">Rehberlerimiz</a></li>
+                        <li><a asp-controller="Home" asp-action="AboutUs" class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "AboutUs" ? "active" : "")">Hakkımızda</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact" class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "active" : "")">İletişim</a></li>
+                    </ul>
+                    
+                    <div class="nav-right">
+                        @if (Context.Session.GetInt32("UserId") != null)
+                        {
+                            <div class="logged-in-menu">
+                                <span class="welcome-text">Hoşgeldin, @Context.Session.GetString("UserName")</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="auth-links">
+                                <a asp-controller="Account" asp-action="Login" class="login-btn">Giriş Yap</a>
+                                <a asp-controller="Account" asp-action="Register" class="signup-btn">Kayıt Ol</a>
+                            </div>
+                        }
+                        <div class="mobile-menu-toggle">
+                            <i class="fas fa-bars"></i>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            
+            <!-- Mobil Menü -->
+            <div class="mobile-menu">
+                <div class="mobile-menu-container">
+                    <ul>
+                        <li><a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Ana Sayfa</a></li>
+                        <li><a href="/Categories"><i class="fas fa-list"></i> Kategoriler</a></li>
+                        <li><a asp-controller="Home" asp-action="Destinations"><i class="fas fa-map-marked-alt"></i> Turlar</a></li>
+                        <li><a asp-controller="Home" asp-action="Guides"><i class="fas fa-users"></i> Rehberlerimiz</a></li>
+                        <li><a asp-controller="Home" asp-action="AboutUs"><i class="fas fa-info-circle"></i> Hakkımızda</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact"><i class="fas fa-envelope"></i> İletişim</a></li>
+                        
+                        @if (Context.Session.GetInt32("UserId") != null)
+                        {
+                            <li class="divider"></li>
+                            <li><a href="/Account/Profile"><i class="fas fa-user"></i> Profilim</a></li>
+                            <li><a href="/Account/Bookings"><i class="fas fa-calendar-check"></i> Rezervasyonlarım</a></li>
+                            <li><a href="/Account/Favorites"><i class="fas fa-heart"></i> Favorilerim</a></li>
+                            <li><a href="/Account/Logout"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a></li>
+                        }
+                        else
+                        {
+                            <li class="divider"></li>
+                            <li><a asp-controller="Account" asp-action="Login"><i class="fas fa-sign-in-alt"></i> Giriş Yap</a></li>
+                            <li><a asp-controller="Account" asp-action="Register"><i class="fas fa-user-plus"></i> Kayıt Ol</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- Bildirim Bölümü -->
+        @if (TempData["SubscribeSuccess"] != null)
+        {
+            <div class="notification success">
+                <div class="container">
+                    <div class="notification-content">
+                        <i class="fas fa-check-circle"></i>
+                        <p>@TempData["SubscribeSuccess"]</p>
+                        <button class="notification-close"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+        
+        @if (TempData["SubscribeError"] != null)
+        {
+            <div class="notification error">
+                <div class="container">
+                    <div class="notification-content">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>@TempData["SubscribeError"]</p>
+                        <button class="notification-close"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @RenderBody()
+
+        <!-- Footer Bölümü -->
+        <footer class="footer-new">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="footer-columns">
+                        <div class="footer-column">
+                            <h3>YerelTurlar</h3>
+                            <p>Yerel rehberlerle Türkiye'nin gizli kalmış yerlerini keşfedin. Benzersiz deneyimler ve unutulmaz anılar için hemen kayıt olun.</p>
+                            <div class="social-icons">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Hızlı Bağlantılar</h3>
+                            <ul>
+                                <li><a href="/">Ana Sayfa</a></li>
+                                <li><a href="/Destinations">Destinasyonlar</a></li>
+                                <li><a href="/Guides">Rehberler</a></li>
+                                <li><a href="/About">Hakkımızda</a></li>
+                                <li><a href="/Contact">İletişim</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Kategoriler</h3>
+                            <ul>
+                                <li><a href="/Categories/Details/kultur">Kültür Turları</a></li>
+                                <li><a href="/Categories/Details/yemek">Yemek Turları</a></li>
+                                <li><a href="/Categories/Details/doga">Doğa Turları</a></li>
+                                <li><a href="/Categories/Details/spor">Spor Aktiviteleri</a></li>
+                                <li><a href="/Categories/Details/fotograf">Fotoğraf Turları</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h3>İletişim</h3>
+                            <ul>
+                                <li><i class="fas fa-map-marker-alt"></i> Atatürk Cad. No:123, İstanbul</li>
+                                <li><i class="fas fa-phone"></i> +90 212 123 45 67</li>
+                                <li><i class="fas fa-envelope"></i> info@yerelturlar.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom-dark">
+                <div class="container">
+                    <div class="footer-bottom-content">
+                        <div class="footer-copyright">
+                            <p>&copy; @DateTime.Now.Year YerelTurlar. Tüm hakları saklıdır.</p>
+                        </div>
+                        <div class="footer-links">
+                            <a href="/gizlilik-politikasi">Gizlilik Politikası</a>
+                            <a href="/kullanim-kosullari">Kullanım Koşulları</a>
+                            <a href="/cerez-politikasi">Çerez Politikası</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

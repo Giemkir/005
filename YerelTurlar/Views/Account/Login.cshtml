@@ -1,0 +1,257 @@
+@model YerelTurlar.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Giriş Yap";
+    Layout = "_AuthLayout";
+}
+
+<section class="auth-section">
+    <div class="container">
+        <div class="auth-container">
+            <div class="auth-content">
+                <div class="auth-header">
+                    <h1>Keşfe Başlayın</h1>
+                    <div class="auth-header-decoration">
+                        <span class="line"></span>
+                        <i class="fas fa-compass"></i>
+                        <span class="line"></span>
+                    </div>
+                    <p>Hesabınıza giriş yaparak size özel turları keşfedin ve anında rezervasyon yapın.</p>
+                </div>
+
+                <div class="auth-tabs">
+                    <button type="button" class="auth-tab-btn active" data-tab="email-login">
+                        <i class="fas fa-envelope"></i>
+                        <span>E-posta</span>
+                    </button>
+                    <button type="button" class="auth-tab-btn" data-tab="social-login">
+                        <i class="fas fa-share-alt"></i>
+                        <span>Sosyal</span>
+                    </button>
+                </div>
+                
+                <div class="tab-content active" id="email-login">
+                    <form class="auth-form" asp-controller="Account" asp-action="Login" method="post">
+                        <div class="form-floating">
+                            <div class="input-container">
+                                <i class="fas fa-at"></i>
+                                <input asp-for="Email" type="email" placeholder=" " required>
+                                <label asp-for="Email">E-posta Adresiniz</label>
+                                <div class="input-focus-bg"></div>
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-floating">
+                            <div class="input-container">
+                                <i class="fas fa-lock"></i>
+                                <input asp-for="Password" type="password" placeholder=" " required>
+                                <label asp-for="Password">Şifreniz</label>
+                                <button type="button" class="toggle-password" aria-label="Şifreyi göster/gizle">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                                <div class="input-focus-bg"></div>
+                            </div>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-options">
+                            <div class="custom-checkbox">
+                                <input asp-for="RememberMe" id="remember" type="checkbox">
+                                <label for="remember">
+                                    <span class="checkbox-icon">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                    <span class="checkbox-text">Beni hatırla</span>
+                                </label>
+                            </div>
+                            <a asp-controller="Account" asp-action="ForgotPassword" class="forgot-password">
+                                Şifremi unuttum <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        
+                        <button type="submit" class="auth-btn">
+                            <span>Giriş Yap</span>
+                            <div class="btn-icon">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="tab-content" id="social-login">
+                    <div class="social-container">
+                        <a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="Google" class="social-btn google">
+                            <div class="social-icon">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <span>Google ile Devam Et</span>
+                        </a>
+                        <a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="Facebook" class="social-btn facebook">
+                            <div class="social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </div>
+                            <span>Facebook ile Devam Et</span>
+                        </a>
+                        <a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="Apple" class="social-btn apple">
+                            <div class="social-icon">
+                                <i class="fab fa-apple"></i>
+                            </div>
+                            <span>Apple ile Devam Et</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="auth-footer">
+                    <div class="auth-footer-decoration">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <p>Henüz hesabınız yok mu? <a asp-controller="Account" asp-action="Register">Hesap Oluşturun</a></p>
+                </div>
+            </div>
+            
+            <div class="auth-image">
+                <div class="image-slider">
+                    <div class="image-slide active">
+                        <img src="https://images.unsplash.com/photo-1599581425921-726d9fa3353f?q=80&w=1000&auto=format&fit=crop" alt="Kapadokya">
+                    </div>
+                    <div class="image-slide">
+                        <img src="https://images.unsplash.com/photo-1527838832700-5059252407fa?q=80&w=1000&auto=format&fit=crop" alt="İstanbul">
+                    </div>
+                    <div class="image-slide">
+                        <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=80&w=1000&auto=format&fit=crop" alt="Pamukkale">
+                    </div>
+                </div>
+                <div class="auth-image-overlay"></div>
+                <div class="image-location-tag">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="location-name">Kapadokya, Türkiye</span>
+                </div>
+                <div class="image-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                </div>
+                <div class="auth-image-content">
+                    <h2>Eşsiz Yerler, Unutulmaz Anılar</h2>
+                    <p>Yerel rehberlerimizle Türkiye'nin gizli kalmış güzelliklerini keşfedin.</p>
+                    <div class="destination-badges">
+                        <span class="badge"><i class="fas fa-mountain"></i> Kapadokya</span>
+                        <span class="badge"><i class="fas fa-mosque"></i> İstanbul</span>
+                        <span class="badge"><i class="fas fa-water"></i> Pamukkale</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Tab değiştirme işlevi
+    var tabButtons = document.querySelectorAll('.auth-tab-btn');
+    var tabContents = document.querySelectorAll('.tab-content');
+    
+    tabButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var tabId = this.getAttribute('data-tab');
+            
+            // Aktif tab işaretlemesi
+            tabButtons.forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            // Tab içeriğini gösterme
+            tabContents.forEach(function(content) {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+    
+    // Şifre göster/gizle işlevi
+    var toggleButtons = document.querySelectorAll('.toggle-password');
+    
+    toggleButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var input = this.parentNode.querySelector('input');
+            var icon = this.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    });
+    
+    // Form input animasyonu
+    var inputs = document.querySelectorAll('.input-container input');
+    
+    inputs.forEach(function(input) {
+        input.addEventListener('focus', function() {
+            this.parentNode.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+            if (this.value === '') {
+                this.parentNode.classList.remove('focused');
+            }
+        });
+        
+        // Sayfa yüklendiğinde değeri varsa focused ekle
+        if (input.value !== '') {
+            input.parentNode.classList.add('focused');
+        }
+    });
+    
+    // Görsel slider
+    var currentSlide = 0;
+    var slides = document.querySelectorAll('.image-slide');
+    var dots = document.querySelectorAll('.image-dots .dot');
+    var locations = ['Kapadokya, Türkiye', 'İstanbul, Türkiye', 'Pamukkale, Türkiye'];
+    var locationElement = document.querySelector('.location-name');
+    
+    function showSlide(index) {
+        // Tüm slide'ları gizle
+        slides.forEach(function(slide) {
+            slide.classList.remove('active');
+        });
+        
+        // Tüm dotları pasif yap
+        dots.forEach(function(dot) {
+            dot.classList.remove('active');
+        });
+        
+        // Seçili slide'ı ve dot'u aktif yap
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        
+        // Lokasyon adını güncelle
+        locationElement.textContent = locations[index];
+        
+        currentSlide = index;
+    }
+    
+    // Dot tıklama ile slide değiştirme
+    dots.forEach(function(dot, index) {
+        dot.addEventListener('click', function() {
+            showSlide(index);
+        });
+    });
+    
+    // Otomatik slider
+    setInterval(function() {
+        var nextSlide = (currentSlide + 1) % slides.length;
+        showSlide(nextSlide);
+    }, 6000);
+});
+</script>
+} 

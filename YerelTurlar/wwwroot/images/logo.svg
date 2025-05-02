@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="200" height="50" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+  <!-- Elegant gradient background with lighter colors -->
+  <defs>
+    <linearGradient id="elegantGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e94e7c" />
+      <stop offset="100%" stop-color="#ff70a6" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Refined background shape with subtle shadow, moved left -->
+  <rect x="0" y="2" width="196" height="46" rx="8" fill="url(#elegantGradient)" />
+  <rect x="-2" y="0" width="196" height="46" rx="8" fill="url(#elegantGradient)" filter="drop-shadow(0px 3px 3px rgba(0,0,0,0.2))" />
+  
+  <!-- Refined location pin icon, moved left -->
+  <path d="M20 10c-3.3 0-6 2.7-6 6 0 4.4 6 12 6 12s6-7.6 6-12c0-3.3-2.7-6-6-6zm0 8c-1.1 0-2-0.9-2-2s0.9-2 2-2 2 0.9 2 2-0.9 2-2 2z" fill="#ffffff" filter="drop-shadow(0px 1px 1px rgba(0,0,0,0.2))" />
+  
+  <!-- Elegant stylized text with proper letter spacing, moved left -->
+  <text x="34" y="30" font-family="'Montserrat', 'Helvetica Neue', sans-serif" font-weight="300" font-size="22" letter-spacing="0.5" fill="#ffffff" filter="drop-shadow(0px 1px 1px rgba(0,0,0,0.1))">
+    <tspan font-weight="600">Yerel</tspan>Turlar
+  </text>
+</svg> 

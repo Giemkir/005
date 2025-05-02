@@ -1,0 +1,464 @@
+@{
+    ViewData["Title"] = "Rehberler";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/guides.css" asp-append-version="true" />
+}
+
+<section class="page-hero">
+    <div class="page-hero-image">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Yerel Rehberler">
+        <div class="page-hero-overlay"></div>
+    </div>
+    <div class="container">
+        <div class="page-hero-content">
+            <h1>Yerel Rehberlerimizle Tanışın</h1>
+            <p>Tutkulu, bilgili ve deneyimli rehberlerimiz size unutulmaz deneyimler yaşatmak için hazır</p>
+        </div>
+    </div>
+</section>
+
+<section class="guides-filter">
+    <div class="container">
+        <div class="filter-container">
+            <div class="filter-group">
+                <label for="location">Şehir</label>
+                <select id="location">
+                    <option value="">Tüm Şehirler</option>
+                    <option value="istanbul">İstanbul</option>
+                    <option value="kapadokya">Kapadokya</option>
+                    <option value="antalya">Antalya</option>
+                    <option value="izmir">İzmir</option>
+                    <option value="gaziantep">Gaziantep</option>
+                    <option value="mardin">Mardin</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="specialty">Uzmanlık</label>
+                <select id="specialty">
+                    <option value="">Tüm Uzmanlıklar</option>
+                    <option value="kultur">Tarih & Kültür</option>
+                    <option value="gastronomi">Gastronomi</option>
+                    <option value="doga">Doğa & Macera</option>
+                    <option value="fotograf">Fotoğrafçılık</option>
+                    <option value="sanat">Sanat & Mimari</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="language">Dil</label>
+                <select id="language">
+                    <option value="">Tüm Diller</option>
+                    <option value="turkce">Türkçe</option>
+                    <option value="ingilizce">İngilizce</option>
+                    <option value="almanca">Almanca</option>
+                    <option value="fransizca">Fransızca</option>
+                    <option value="ispanyolca">İspanyolca</option>
+                    <option value="rusca">Rusça</option>
+                </select>
+            </div>
+            <button class="filter-btn">Filtrele</button>
+        </div>
+    </div>
+</section>
+
+<section class="featured-guides">
+    <div class="container">
+        <div class="section-title-container guides-title-container">
+            <div class="tag-container">
+                <span class="section-subtitle guides-subtitle">ÖNE ÇIKANLAR</span>
+            </div>
+            <h2>Top Rehberlerimiz</h2>
+            <p class="section-description">En yüksek puanlı ve en çok tercih edilen rehberlerimizle tanışın.</p>
+            <span class="title-separator"></span>
+        </div>
+        
+        <div class="featured-guides-grid">
+            <!-- Rehber 1 -->
+            <div class="featured-guide-card">
+                <div class="guide-card-inner">
+                    <div class="guide-card-front">
+                        <div class="guide-image">
+                            <img src="https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?q=80&w=1966&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ahmet Yılmaz">
+                            <div class="guide-badge top">Top Rehber</div>
+                        </div>
+                        <div class="guide-info">
+                            <h3>Ahmet Yılmaz</h3>
+                            <p class="guide-location"><i class="fas fa-map-marker-alt"></i> İstanbul</p>
+                            <p class="guide-specialty">Denizcilik Uzmanı & Tarih Tutkunu</p>
+                            <div class="guide-rating">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
+                                <span class="rating-count">4.9 (128)</span>
+                            </div>
+                            <div class="guide-languages">
+                                <span>Türkçe</span>
+                                <span>İngilizce</span>
+                                <span>Almanca</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card-footer">
+                    <a asp-controller="Home" asp-action="GuideDetail" asp-route-id="1" class="guide-profile-btn">Profili Görüntüle</a>
+                    <a href="#" class="guide-contact-btn"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <!-- Rehber 2 -->
+            <div class="featured-guide-card">
+                <div class="guide-card-inner">
+                    <div class="guide-card-front">
+                        <div class="guide-image">
+                            <img src="https://images.unsplash.com/photo-1485893086445-ed75865251e0?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Zeynep Şahin">
+                            <div class="guide-badge">Şef</div>
+                        </div>
+                        <div class="guide-info">
+                            <h3>Zeynep Şahin</h3>
+                            <p class="guide-location"><i class="fas fa-map-marker-alt"></i> Gaziantep</p>
+                            <p class="guide-specialty">Gastronomi Uzmanı & Şef</p>
+                            <div class="guide-rating">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
+                                <span class="rating-count">4.9 (112)</span>
+                            </div>
+                            <div class="guide-languages">
+                                <span>Türkçe</span>
+                                <span>İngilizce</span>
+                                <span>Fransızca</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card-footer">
+                    <a asp-controller="Home" asp-action="GuideDetail" asp-route-id="2" class="guide-profile-btn">Profili Görüntüle</a>
+                    <a href="#" class="guide-contact-btn"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <!-- Rehber 3 -->
+            <div class="featured-guide-card">
+                <div class="guide-card-inner">
+                    <div class="guide-card-front">
+                        <div class="guide-image">
+                            <img src="https://plus.unsplash.com/premium_photo-1673164900389-99f94c4577f5?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ozan Yıldız">
+                            <div class="guide-badge">Arkeolog</div>
+                        </div>
+                        <div class="guide-info">
+                            <h3>Ozan Yıldız</h3>
+                            <p class="guide-location"><i class="fas fa-map-marker-alt"></i> İzmir</p>
+                            <p class="guide-specialty">Arkeolog & Tarih Uzmanı</p>
+                            <div class="guide-rating">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
+                                <span class="rating-count">4.8 (178)</span>
+                            </div>
+                            <div class="guide-languages">
+                                <span>Türkçe</span>
+                                <span>İngilizce</span>
+                                <span>İtalyanca</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card-footer">
+                    <a asp-controller="Home" asp-action="GuideDetail" asp-route-id="3" class="guide-profile-btn">Profili Görüntüle</a>
+                    <a href="#" class="guide-contact-btn"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="all-guides">
+    <div class="container">
+        <div class="section-title-container guides-title-container">
+            <div class="tag-container">
+                <span class="section-subtitle guides-subtitle">KEŞFET</span>
+            </div>
+            <h2>Tüm Rehberlerimiz</h2>
+            <p class="section-description">Türkiye'nin dört bir yanından uzman rehberlerimizle tanışın.</p>
+            <span class="title-separator"></span>
+        </div>
+        
+        <div class="guides-grid">
+            <!-- Rehber 1 -->
+            <div class="featured-guide-card">
+                <div class="guide-card-inner">
+                    <div class="guide-card-front">
+                        <div class="guide-image">
+                            <img src="https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?q=80&w=1966&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ahmet Yılmaz">
+                            <div class="guide-badge top">Top Rehber</div>
+                        </div>
+                        <div class="guide-info">
+                            <h3>Ahmet Yılmaz</h3>
+                            <p class="guide-location"><i class="fas fa-map-marker-alt"></i> İstanbul</p>
+                            <p class="guide-specialty">Denizcilik Uzmanı</p>
+                            <div class="guide-rating">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
+                                <span class="rating-count">4.9 (128)</span>
+                            </div>
+                            <div class="guide-languages">
+                                <span>Türkçe</span>
+                                <span>İngilizce</span>
+                                <span>Almanca</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card-footer">
+                    <a asp-controller="Home" asp-action="GuideDetail" asp-route-id="1" class="guide-profile-btn">Profili Görüntüle</a>
+                    <a href="#" class="guide-contact-btn"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <!-- Rehber 2 -->
+            <div class="featured-guide-card">
+                <div class="guide-card-inner">
+                    <div class="guide-card-front">
+                        <div class="guide-image">
+                            <img src="https://images.unsplash.com/photo-1485893086445-ed75865251e0?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Zeynep Şahin">
+                            <div class="guide-badge">Şef</div>
+                        </div>
+                        <div class="guide-info">
+                            <h3>Zeynep Şahin</h3>
+                            <p class="guide-location"><i class="fas fa-map-marker-alt"></i> Gaziantep</p>
+                            <p class="guide-specialty">Gastronomi Uzmanı</p>
+                            <div class="guide-rating">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
+                                <span class="rating-count">4.9 (112)</span>
+                            </div>
+                            <div class="guide-languages">
+                                <span>Türkçe</span>
+                                <span>İngilizce</span>
+                                <span>Fransızca</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card-footer">
+                    <a asp-controller="Home" asp-action="GuideDetail" asp-route-id="2" class="guide-profile-btn">Profili Görüntüle</a>
+                    <a href="#" class="guide-contact-btn"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <!-- Rehber 3 -->
+            <div class="featured-guide-card">
+                <div class="guide-card-inner">
+                    <div class="guide-card-front">
+                        <div class="guide-image">
+                            <img src="https://plus.unsplash.com/premium_photo-1673164900389-99f94c4577f5?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ozan Yıldız">
+                            <div class="guide-badge">Arkeolog</div>
+                        </div>
+                        <div class="guide-info">
+                            <h3>Ozan Yıldız</h3>
+                            <p class="guide-location"><i class="fas fa-map-marker-alt"></i> İzmir</p>
+                            <p class="guide-specialty">Arkeolog & Tarih Uzmanı</p>
+                            <div class="guide-rating">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
+                                <span class="rating-count">4.8 (178)</span>
+                            </div>
+                            <div class="guide-languages">
+                                <span>Türkçe</span>
+                                <span>İngilizce</span>
+                                <span>İtalyanca</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card-footer">
+                    <a asp-controller="Home" asp-action="GuideDetail" asp-route-id="3" class="guide-profile-btn">Profili Görüntüle</a>
+                    <a href="#" class="guide-contact-btn"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <!-- Rehber 4 -->
+            <div class="featured-guide-card">
+                <div class="guide-card-inner">
+                    <div class="guide-card-front">
+                        <div class="guide-image">
+                            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ayşe Demir">
+                            <div class="guide-badge">Fotoğrafçı</div>
+                        </div>
+                        <div class="guide-info">
+                            <h3>Ayşe Demir</h3>
+                            <p class="guide-location"><i class="fas fa-map-marker-alt"></i> Antalya</p>
+                            <p class="guide-specialty">Fotoğrafçılık & Doğa Uzmanı</p>
+                            <div class="guide-rating">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </span>
+                                <span class="rating-count">4.5 (98)</span>
+                            </div>
+                            <div class="guide-languages">
+                                <span>Türkçe</span>
+                                <span>İngilizce</span>
+                                <span>Rusça</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card-footer">
+                    <a asp-controller="Home" asp-action="GuideDetail" asp-route-id="4" class="guide-profile-btn">Profili Görüntüle</a>
+                    <a href="#" class="guide-contact-btn"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <!-- Rehber 5 -->
+            <div class="featured-guide-card">
+                <div class="guide-card-inner">
+                    <div class="guide-card-front">
+                        <div class="guide-image">
+                            <img src="https://images.unsplash.com/photo-1530268729831-4b0b9e170218?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mehmet Kaya">
+                            <div class="guide-badge">Dağcı</div>
+                        </div>
+                        <div class="guide-info">
+                            <h3>Mehmet Kaya</h3>
+                            <p class="guide-location"><i class="fas fa-map-marker-alt"></i> Erzurum</p>
+                            <p class="guide-specialty">Dağcılık & Kış Sporları</p>
+                            <div class="guide-rating">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
+                                <span class="rating-count">4.8 (142)</span>
+                            </div>
+                            <div class="guide-languages">
+                                <span>Türkçe</span>
+                                <span>İngilizce</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card-footer">
+                    <a asp-controller="Home" asp-action="GuideDetail" asp-route-id="5" class="guide-profile-btn">Profili Görüntüle</a>
+                    <a href="#" class="guide-contact-btn"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <!-- Rehber 6 -->
+            <div class="featured-guide-card">
+                <div class="guide-card-inner">
+                    <div class="guide-card-front">
+                        <div class="guide-image">
+                            <img src="https://plus.unsplash.com/premium_photo-1681489847451-0eaec69a0214?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Elif Yıldırım">
+                            <div class="guide-badge">Sanat</div>
+                        </div>
+                        <div class="guide-info">
+                            <h3>Elif Yıldırım</h3>
+                            <p class="guide-location"><i class="fas fa-map-marker-alt"></i> İstanbul</p>
+                            <p class="guide-specialty">Sanat & Mimari Uzmanı</p>
+                            <div class="guide-rating">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </span>
+                                <span class="rating-count">4.6 (87)</span>
+                            </div>
+                            <div class="guide-languages">
+                                <span>Türkçe</span>
+                                <span>İngilizce</span>
+                                <span>Fransızca</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card-footer">
+                    <a asp-controller="Home" asp-action="GuideDetail" asp-route-id="6" class="guide-profile-btn">Profili Görüntüle</a>
+                    <a href="#" class="guide-contact-btn"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pagination">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#" class="next"><i class="fas fa-chevron-right"></i></a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filtreleme işlevselliği
+            const filterBtn = document.querySelector('.filter-btn');
+            if (filterBtn) {
+                filterBtn.addEventListener('click', function() {
+                    // Filtreleme işlemleri burada yapılacak
+                    console.log('Filtreleme yapılıyor...');
+                    
+                    // Örnek: Seçilen değerleri al
+                    const location = document.getElementById('location').value;
+                    const specialty = document.getElementById('specialty').value;
+                    const language = document.getElementById('language').value;
+                    
+                    console.log('Seçilen filtreler:', { location, specialty, language });
+                    
+                    // Burada gerçek filtreleme işlemleri yapılabilir
+                    // Şimdilik sadece bir bildirim gösterelim
+                    alert('Filtreleme özelliği henüz aktif değildir. Seçilen filtreler: ' + 
+                          'Şehir: ' + (location || 'Tümü') + 
+                          ', Uzmanlık: ' + (specialty || 'Tümü') + 
+                          ', Dil: ' + (language || 'Tümü'));
+                });
+            }
+            
+            // Rehber kartları için hover efektleri
+            const guideCards = document.querySelectorAll('.featured-guide-card');
+            guideCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+} 
